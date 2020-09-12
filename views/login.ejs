@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- Content-Security-Policy: default-src 'self' -->
+  <!-- <meta http-equiv="Content-Security-Policy"
+    content="default-src * data: gap: 'unsafe-eval' ws: ; style-src 'self'  'unsafe-inline'; connect-src *; script-src 'self'  'unsafe-inline' 'unsafe-eval'  https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js "> -->
+  <link rel="stylesheet" href="css/login-signup.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+  <title>Login</title>
+</head>
+
+<body>
+  <div class="logo-login-page">
+    <a href="/"> <img class="logo-img-login-page" src="img/login-signup-logo.png" alt="" /></a>
+  </div>
+  <div class="form-login">
+    <form class="form" method="post">
+      <ul class="form-container-login-page">
+        <li>
+          <h1>Login</h1>
+
+        </li>
+        <p class="alert hideAlert "
+          style="padding-top: .8rem;padding-bottom: .8rem; text-align: center; margin-top: .5rem; border: 2px solid red; font-size: 1rem;color: red;"
+          id="alert">
+        </p>
+
+
+        <li>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" value="" autocomplete="off" />
+        </li>
+
+        <li>
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" value="" autocomplete="off" />
+          <i class="fa fa-eye" id="togglePassword"></i>
+          <br />
+          <a href="#" style="text-decoration: none; text-align: left; color: #2691d9">Forgot Password?</a>
+        </li>
+        <li>
+          <button type="submit" name="button" class="button-primary">
+            Login
+          </button>
+        </li>
+        <li>
+          <p>
+            By continuing, you agree to all Conditions of Use and Privacy
+            Notice.
+          </p>
+        </li>
+        <br />
+        <li class="ask-signup-for-smallScreens" style="text-align: center; font-size: 0.85rem; color: #8c3831">
+          New to IndiCraft?<a class="test" style="
+                margin-top: 10px;
+                text-decoration: none;
+                color: #2b2b2a;
+
+                text-decoration: none;
+                background-color: #f0f0f0;
+                padding: 6px;
+
+                text-align: center;
+                align-content: center;
+                padding-right: -9px;
+
+                border: 1px #c0c0c0;
+                font-size: 1.1rem;
+                border-radius: 0.3rem;
+                border-style: outset;
+                box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+              " href="/signup">Create your Account</a>
+        </li>
+        <br class="br-login-form" />
+      </ul>
+    </form>
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+
+  <script src="login-signup.js"></script>
+  <script src="js/bundle.js"></script>
+
+</body>
+<footer><br /><br /><br /></footer>
+
+</html>

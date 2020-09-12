@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add New Products | Admin Dashboard | IndiCraft</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet"
+        href="https://d19m59y37dris4.cloudfront.net/admin/1-4-6/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/admin/1-4-6/css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- Main Navbar-->
+        <header class="header">
+            <nav class="navbar" style="background-color: #194342 !important;">
+                <!-- Search Box-->
+                <div class="search-box">
+                    <button class="dismiss"><i class="icon-close"></i></button>
+                    <form id="searchForm" action="#" role="search">
+                        <input type="search" placeholder="What are you looking for..." class="form-control">
+                    </form>
+                </div>
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <!-- Navbar Header-->
+                        <div class="navbar-header">
+                            <!-- Navbar Brand --><a href="/" class="navbar-brand d-none d-sm-inline-block">
+                                <div class="brand-text d-none d-lg-inline-block"><strong>IndiCraft</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
+                            </a>
+                            <!--  -->
+                        </div>
+                        <!-- Navbar Menu -->
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch">
+            <!-- Side Navbar -->
+            <nav class="side-navbar">
+                <!-- Sidebar Header-->
+                <div class="sidebar-header d-flex align-items-center">
+
+                    <div class="title">
+                        <h1 class="h4"><%=user.name%></h1>
+                        <p>Admin</p>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar Navidation Menus-->
+                <ul class="list-unstyled">
+                    <li><a href="/admin-dashboard"> <i class="icon-home"></i>Home </a></li>
+                    <li class="active"><a href=""> <i class="icon-grid"></i>Add New Product </a></li>
+                    <li><a href="/admin-view_All_products"> <i class="icon-interface-windows"></i>View All Product</a>
+                    </li>
+                    <li><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
+                    <li><a href="/admin-view_All_Users"> <i class="fas fa-user"></i>View All User</a></li>
+                    <li><a href="/me"> <i class="icon-padnote"></i>My Account </a></li>
+                </ul>
+                <!-- <ul class="list-unstyled">
+                    <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
+                    <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
+                    <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
+                    <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
+                </ul> -->
+            </nav>
+            <div class="content-inner">
+                <!-- Page Header-->
+                <header class="page-header">
+                    <div class="container-fluid">
+                        <h2 class="no-margin-bottom">Dashboard</h2>
+                    </div>
+                </header>
+                <div
+                    style="display:flex;width:100%; align-content: center;margin-left: 10rem; margin-top: 3rem;margin-bottom: 4rem;">
+                    <form class="add_new_product">
+                        <p class="hidden" id="SuccessAddproduct" style="border:.1rem solid red; width: 80%;"></p>
+                        <fieldset>
+                            <legend>Add New Product</legend>
+                            <br><br>
+                            <div class="form-group">
+                                <label for="productName">Product Title</label>
+                                <input type="text" class="form-control" id="productname" aria-describedby="product"
+                                    placeholder="Enter Product Title" required minlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="productCategory">Product Category</label>
+                                <input type="text" class="form-control" id="productcategory"
+                                    aria-describedby="emailHelp" placeholder="Enter Product Category" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productSubCategory">Product SUBCATEGORY(optional)</label>
+                                <input type="text" class="form-control" id="productSubCategory"
+                                    aria-describedby="emailHelp" placeholder="Enter Product's SubCategory" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">Selling Price</label>
+                                <input type="tel" class="form-control" id="productSellPrice"
+                                    aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">Max Price</label>
+                                <input type="tel" class="form-control" id="productMaxPrice" aria-describedby="emailHelp"
+                                    placeholder="AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">AVAILABLE QUANTITY</label>
+                                <input type="tel" class="form-control" id="productAvailableQty"
+                                    aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productweight">PRODUCT WEIGHT</label>
+                                <input type="tel" class="form-control" id="productweight" aria-describedby="emailHelp"
+                                    placeholder="PRODUCT WEIGHT" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">Delivery Charge</label>
+                                <input type="tel" class="form-control" id="deliverycharge" value="₹"
+                                    aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productDescription">PRODUCT DESCRIPTION</label>
+                                <textarea type="textarea" class="form-control" id="productDescription"
+                                    aria-describedby="emailHelp" rows="3" placeholder="PRODUCT DESCRIPTION"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleSelect1">Approved By</label>
+                                <select class="form-control" id="approvedBy">
+                                    <option>Choose</option>
+                                    <option>Alok Puri</option>
+                                    <option>Shashwat Pratap Singh</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Enable Display</label>
+                                <select class="form-control" id="enableDisplay">
+                                    <option>Choose</option>
+                                    <option>Yes</option>
+                                    <option>No</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Deal Of Day</label>
+                                <select class="form-control" id="dealOfDay">
+                                    <option>Yes</option>
+                                    <option>No</option>
+
+                                </select>
+                            </div>
+
+                            <br>
+                            <h4>Tags</h4>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 1</label><br>
+                                <input type="text" id="tag1">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 2</label><br>
+                                <input type="text" id="tag2">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 3</label><br>
+                                <input type="text" id="tag3">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 4</label><br>
+                                <input type="text" id="tag4">
+
+                            </div>
+
+
+                            <div class="wrap-file" style="display: flex;">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Product Image(Thumbnail)</label>
+                                    <input type="file" class="form-control-file" id="exampleInputFile"
+                                        aria-describedby="fileHelp">
+                                    <small id="fileHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Product Image(Big)</label>
+                                    <input type="file" class="form-control-file" id="exampleInputFile"
+                                        aria-describedby="fileHelp">
+                                    <small id="fileHelp" class="form-text text-muted">For Product Detail Page.</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="submitProduct"
+                                    style="padding: 1rem; border-radius: .8rem; background-color: #194342;color: white;border: 1px solid;font-weight: bold;">Add
+                                    Product</button>
+                                </select>
+                            </div>
+                    </form>
+                </div> <!-- Page Footer-->
+                <footer class="main-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>IndiCraft &copy; 2020</p>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <p>Design by <a href="" class="external">ALOK PURI</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="js/bundle.js"></script>
+    <script src="jquery.min.js"></script>
+
+</body>
+
+</html>

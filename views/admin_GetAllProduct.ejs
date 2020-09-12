@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>View All Products | Admin Dashboard | IndiCraft</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet"
+        href="https://d19m59y37dris4.cloudfront.net/admin/1-4-6/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/admin/1-4-6/css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- Main Navbar-->
+        <header class="header">
+            <nav class="navbar" style="background-color: #194342 !important;">
+                <!-- Search Box-->
+                <div class="search-box">
+                    <button class="dismiss"><i class="icon-close"></i></button>
+                    <form id="searchForm" action="#" role="search">
+                        <input type="search" placeholder="What are you looking for..." class="form-control">
+                    </form>
+                </div>
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <!-- Navbar Header-->
+                        <div class="navbar-header">
+                            <!-- Navbar Brand --><a href="/" class="navbar-brand d-none d-sm-inline-block">
+                                <div class="brand-text d-none d-lg-inline-block"><strong>IndiCraft</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
+                            </a>
+                            <!--  -->
+                        </div>
+                        <!-- Navbar Menu -->
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch">
+            <!-- Side Navbar -->
+            <nav class="side-navbar">
+                <!-- Sidebar Header-->
+                <div class="sidebar-header d-flex align-items-center">
+
+                    <div class="title">
+                        <h1 class="h4"><%=user.name%></h1>
+                        <p>Admin</p>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar Navidation Menus-->
+                <ul class="list-unstyled">
+                    <li><a href="/admin-dashboard"> <i class="icon-home"></i>Home </a></li>
+                    <li><a href="/admin-add_products"> <i class="icon-grid"></i>Add New Product </a></li>
+                    <li class="active"><a href=""> <i class="icon-interface-windows"></i>View All Product</a></li>
+                    <li><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
+                    <li><a href="/admin-view_All_Users"> <i class="fas fa-user"></i>View All User</a></li>
+                    <li><a href="/me"> <i class="icon-padnote"></i>My Account </a></li>
+                </ul>
+
+            </nav>
+            <div class="content-inner">
+                <!-- Page Header-->
+                <header class="page-header">
+                    <div class="container-fluid">
+                        <h2 class="no-margin-bottom">Dashboard</h2>
+                    </div>
+                </header>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">&nbsp;&nbsp;&nbsp;</th>
+                            <th scope="col">Id</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Product Price</th>
+                            <th scope="col">Available Qty</th>
+                            <th scope="col">Added By </th>
+                            <th scope="col">Enable Display </th>
+                            <th scope="col">Edit </th>
+                            <th scope="col">Delete </th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%products.forEach (function(products){%>
+
+                        <tr style="color: black;font-family: 'Crimson Text', serif;font-size: 1rem;">
+                            <!-- <th scope="row">i</th> -->
+                            <!-- <td></td> -->
+                            <td><img style="height: 6rem !important;" src="img/22.jpg" alt=""></td>
+                            <td><%=products._id%></td>
+                            <td style="font-weight: bold;"><%=products.name%></td>
+                            <td>₹<%=products.price%></td>
+                            <%if(products.availableQty>=5){%>
+                            <td style="color: green;"><span style="font-weight: bold;"><%=products.availableQty %>
+                                    Unit</span>
+                            </td>
+                            <%}else{%>
+                            <td style="color:  red;font-weight: bold;"><%=products.availableQty%> Unit</td>
+                            <%}%>
+                            <td><%=products.approvedBy%></td>
+                            <td>
+                                <form action="">
+                                    <select name="enableDisplay" id="enableDisplay">
+                                        <option value="<%=products.enableDisplay%>">
+                                            <%=(products.enableDisplay)%></option>
+                                        <option value="">NO</option>
+                                    </select>
+                                </form>
+                            </td>
+
+                            <td><a href="/delete-prod/<%=products._id%>"><button class="<products._id>" id=""
+                                        type="submit"><i class="fa fa-edit"></i></button></a>
+                            </td>
+                            <td><button onclick="click()" class="<%=products._id%>" id="deleteProduct"
+                                    type="submit">X</button>
+                            </td>
+
+                        </tr>
+                        <%});%>
+                    </tbody>
+                </table>
+                <br><br><br>
+                <div style="color: black;margin-bottom: 0;height: 4rem; border-top: 1px solid;" class="row">
+                    <div style="margin-top: 3rem;" class="col-sm-6">
+                        <p>IndiCraft &copy; 2020</p>
+                    </div>
+                    <div style="margin-top: 3rem;" class="col-sm-6 text-right">
+                        <p>Design by <a href="" class="external">ALOK PURI</a></p>
+                    </div>
+
+                </div>
+            </div> <!-- Page Footer-->
+
+        </div>
+
+
+    </div>
+    </div>
+
+
+    <script src="js/bundle.js"></script>
+    <script src="jquery.min.js"></script>
+
+</body>
+
+
+</html>

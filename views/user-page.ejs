@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>IndiCraft | User Dashboard</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="owl.carousel.min.css" />
+    <link rel="stylesheet" href="owl.theme.default.min.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    /> -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/mainStyle.css" />
+    <style media="screen">
+        /* *******************************************COLAPSABLE****************************** */
+        .hidden {
+            display: none;
+        }
+
+        .form-user-data {
+            -webkit-box-shadow: 2px 2px 49px 4px rgba(20, 18, 20, 0.09);
+            -moz-box-shadow: 2px 2px 49px 4px rgba(20, 18, 20, 0.09);
+            box-shadow: 2px 2px 49px 4px rgba(20, 18, 20, 0.09);
+        }
+
+        .form-user-password {
+            -webkit-box-shadow: 2px 2px 49px 4px rgba(20, 18, 20, 0.09);
+            -moz-box-shadow: 2px 2px 49px 4px rgba(20, 18, 20, 0.09);
+            box-shadow: 2px 2px 49px 4px rgba(20, 18, 20, 0.09);
+        }
+
+        .wrap-user-account li {
+            list-style-type: none;
+        }
+
+        input[type=text],
+        [type=email],
+        [type=password],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #373838;
+        }
+
+        .wrap-user-account input {
+            padding-bottom: .6rem;
+            padding-top: .6rem;
+            width: 80%;
+            font-size: 1rem;
+            margin-top: .7rem;
+            margin-bottom: 1.6rem;
+            border-radius: .8rem;
+            border: 1px solid grey;
+        }
+
+        .wrap-user-account label {
+            padding-bottom: .68rem;
+        }
+
+        .userpage_Submit {
+            padding: .7rem;
+            font-size: .8rem;
+            border-radius: 1rem;
+            border: none;
+            background-color: #194342;
+            color: white;
+
+        }
+
+        .userpage_Submit:hover {
+            -webkit-box-shadow: -12px 3px 95px -24px rgba(20, 18, 20, 0.31);
+            -moz-box-shadow: -12px 3px 95px -24px rgba(20, 18, 20, 0.31);
+            box-shadow: -12px 3px 95px -24px rgba(20, 18, 20, 0.31);
+            cursor: pointer;
+
+        }
+
+        .collapsible {
+            background-color: #777;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            border-bottom: 5px solid #DEB887;
+        }
+
+        .active,
+        .collapsible:hover {
+            background-color: #555;
+        }
+
+        .content {
+            padding: 0 18px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.2s ease-out;
+            background-color: #f1f1f1;
+        }
+
+        /* ************************************************ Dropdown-Navbar(desktop)********************* */
+
+        .dropbtn {
+            background-color: #194342;
+            color: white;
+            padding: 17px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-right: 1.5rem;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 14px 20px;
+            font-size: 1rem;
+            width: 81.5%;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        @media only screen and (max-width: 720px) {
+
+            .dropdown {
+                display: none;
+            }
+
+            .wrap-user-account input {
+                padding-bottom: .6rem;
+                padding-top: .6rem;
+                width: 100%;
+                font-size: 1rem;
+                margin-top: .7rem;
+                margin-bottom: 1.6rem;
+                border-radius: .8rem;
+                border: 1px solid grey;
+            }
+
+        }
+
+
+        /* *********************************TEST***************************************************** */
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            -webkit-box-shadow: 1px 6px 10px 8px rgba(184, 178, 184, 0.95);
+            -moz-box-shadow: 1px 6px 10px 8px rgba(184, 178, 184, 0.95);
+            box-shadow: 1px 6px 10px 8px rgba(184, 178, 184, 0.95);
+        }
+
+        .card img {
+            width: 100%;
+        }
+
+        .card {
+            flex: 0 1 calc(25% - 1em);
+            background-color: white;
+            -webkit-box-shadow: 3px 2px 3px -1px rgba(184, 178, 184, 0.95);
+            -moz-box-shadow: 3px 2px 3px -1px rgba(184, 178, 184, 0.95);
+            box-shadow: 3px 2px 3px -1px rgba(184, 178, 184, 0.95);
+        }
+
+        @media only screen and (min-width: 820px) {
+            .centered {
+                display: none;
+            }
+
+            .card {
+                flex: 0 1 calc(25% - 1em);
+                background-color: white;
+                -webkit-box-shadow: 3px 2px 3px -1px rgba(184, 178, 184, 0.95);
+                -moz-box-shadow: 3px 2px 3px -1px rgba(184, 178, 184, 0.95);
+                box-shadow: 3px 2px 3px -1px rgba(184, 178, 184, 0.95);
+            }
+
+            .centered {
+                padding-right: 3rem;
+                padding-left: 3rem;
+            }
+        }
+
+        @media only screen and (min-width: 1441px) {
+            .card img {
+                /* width: 100%; */
+                height: 80% !important;
+            }
+
+            .centered {
+                padding-left: 5rem;
+                padding-right: 5rem;
+            }
+        }
+
+
+
+        /* *********************************TEST END***************************************************** */
+    </style>
+</head>
+
+<body>
+    <!-- <div class="top-most" style="
+        width: 100%;
+        background-color: burlywood;
+        height: 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        font-size: 0.88rem;
+        z-index: -1;
+      ">
+        Free shipping on orders above ₹ 5,500
+    </div> -->
+    <div class="grid-container-main">
+        <!-- ********************************************* Header ********************************** -->
+
+        <header class="header fixed-top">
+            <div class="brand">
+                <button type="button" id="buttonOpen" class="sidebar-button-mobile" name="button">
+                    &#9776;
+                </button>
+                <!-- <button class="sidebar-button-mobile" onclick="openMenu()" name="button"><i class="material-icons menu-icon">menu</i></button> -->
+
+                <a href="/">IndiCraft</a>
+                <!-- <img class="logo-imageSize" src="onlinelogomaker-081620-1301-7113.png" alt=""> -->
+            </div>
+
+            <div class="wrapper-cart-login">
+                <!-- ************************************************* DROPDOWN (FOR DESKTOP)***************************** -->
+                <%if(user===0){%>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        More<i class="material-icons">keyboard_arrow_down</i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/login"><i class="material-icons">local_mall</i>My Orders</a>
+                        <a href="/login"><i class="material-icons">account_circle</i>My Profile</a>
+                        <a href="/login"><i class="material-icons">storefront</i>Sell on IndiCraft</a>
+                    </div>
+                </div>
+                <%}else{%>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <span style="font-weight: 500;"><i class="material-icons">account_circle</i></span>
+                        &nbsp;<span style="font-weight: 600;"><%=user.name.split(" ")[0].toUpperCase()%></span><i
+                            class="material-icons">keyboard_arrow_down</i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/me"><i class="material-icons">account_circle</i> My Profile</a>
+                        <a href="/me"><i class="material-icons">local_mall</i> My Orders</a>
+                        <a href="/"><i class="material-icons">local_mall</i> Start Shopping</a>
+                        <a href="#"><i class="material-icons">phone_in_talk</i> 24x7 Customer Care</a>
+                        <a href="#"><i class="material-icons">storefront</i> Sell on IndiCraft</a>
+                        <!-- <button type="submit" class="logout"
+                            style="margin-left: .6rem; padding-top: 1rem; padding-bottom: 1rem; background: none; border: none;"><i><img
+                                    style="width:1.2rem;margin-left:12px ; height: .9rem; display: flex-box; justify-content:space-evenly;"
+                                    src="img/power-button-off.png" alt="" srcset=""></i>&nbsp;
+                            <span
+                                style="font-size: 1rem;height: 1.7rem; margin-left:2px ;margin-bottom: 5px;text-align: left;">
+                                Logout</span>
+                        </button> -->
+                    </div>
+                </div>
+                <%if(user.role==="admin"){%>
+                <div class="header-links-Login">
+                    <i class="material-icons account-icon"> account_circle </i>
+                    <a class="login-button" href="/admin-dashboard"> Dashboard</a>
+                </div>
+                <%}}%>
+
+                <!-- <div class="dropdown">
+            <button class="dropbtn">Login</button>
+            <div class="dropdown-content">
+              <a href="#">SignUp</a>
+              <a href="#"
+                ><i class="material-icons">account_circle</i>My Profile</a
+              >
+              <a href="#"
+                ><i class="material-icons">storefront</i>Sell on IndiCraft</a
+              >
+            </div>
+          </div> -->
+                <%if(user===0){%>
+                <div class="header-links-Login">
+                    <i class="material-icons account-icon"> account_circle </i>
+                    <a class="login-button" href="/login"> Login</a>
+                </div>
+
+
+                <%}%>
+        <div class="header-links-cart">
+          <a class="cartName2" href="/shopping-cart"><i class="material-icons">shopping_cart</i><%if(session.cart){%><i
+                    style="
+                  border-radius: 50%;
+                  font-size: 0.9rem;
+                  font-weight: bold;
+                  background-color: red;
+                  padding: 3px 5px;
+                "><%=session.cart.totalQty%></i><%}%></a>
+          <a class="cartName" style="font-size: 1.2rem" href="/shopping-cart">
+            Cart
+            <i class="material-icons">shopping_cart</i>
+            <%if(session.cart){%><i style="
+                  border-radius: 50%;
+                  font-size: 0.9rem;
+                  font-weight: bold;
+                  background-color: red;
+                  padding: 3px 5px;
+                  margin-bottom: 5px;
+                "><%=session.cart.totalQty%>
+                </i><%}%>
+            </a>
+            <!-- <div class="sub">Rs 24000.0</div> -->
+          </div>
+        </div>
+      </header>
+
+      <!-- ************************************************* Header Ends******************************************** -->
+
+      <!-- ********************************************************* Sidebar (For Mobile)********************************* -->
+
+      <aside class="sidebar-mobile" style="z-index: 1; top: 0">
+        <h2 class="top-sidebar-mobile">
+          <%if(user===0){%>
+                <a href="/login"><i class="material-icons">person</i>Hello, SignIn</a>
+                </h2>
+                <hr style="color: black" />
+                <button type="button" class="sidebar-close-button">x</button>
+                <ul class="sidebar-top-ul">
+                    <li>
+                        <a href="/"><i class="material-icons">home</i> Home</a>
+                    </li>
+                    <li>
+                        <a href="/login"><i class="material-icons">shopping_cart</i> My Cart</a>
+                    </li>
+                    <li>
+                        <a href="/login"><i class="material-icons">local_mall</i> My Orders</a>
+                    </li>
+                    <li>
+                        <a href="/login"><i class="material-icons">account_circle</i> My Profile</a>
+                    </li>
+
+
+                    <%}else{%>
+                    <a href="/"><i class="material-icons">person</i><span style="font-size: 1.3rem;"> Hello</span> ,
+                        <b style="font-size: 1.3rem;"><%=user.name.split(" ")[0].toUpperCase()%></b></a>
+
+                    </h2>
+                    <hr style="color: black" />
+                    <button type="button" class="sidebar-close-button">x</button>
+                    <ul class="sidebar-top-ul">
+                        <li>
+                            <a href="#"><i class="material-icons">home</i> Home</a>
+                        </li>
+                        <li>
+                            <a href="/shopping-cart"><i class="material-icons">shopping_cart</i> My Cart</a>
+                        </li>
+                        <li>
+                            <a href="/me"><i class="material-icons">local_mall</i> My Orders</a>
+                        </li>
+                        <li>
+                            <a href="/me"><i class="material-icons">account_circle</i> My Account</a>
+                        </li>
+
+                        <li><a href="#"><i class="material-icons">phone_in_talk</i> Customer Care</a></li>
+                        <!-- <button href="/" type="submit" class="logout2"
+                            style="margin-left: .6rem; padding-top: 1rem; padding-bottom: 1rem; background: none; border: none;"><i><img
+                                    style="width:1.2rem;margin-left:12px ; height: .9rem; display: flex-box; justify-content:space-evenly;"
+                                    src="img/power-button-off.png" alt="" srcset=""></i>&nbsp;
+                            <span
+                                style="font-size: 1rem;height: 1.7rem; margin-left:2px ;margin-bottom: 5px;text-align: left;">
+                                Logout</span>
+                        </button> -->
+
+                        <%}%>
+        </ul>
+      
+      </aside>
+    </div>
+
+    <!-- ****************************************************************** Main Starts**************************************** -->
+<br><br>
+
+<!-- /////////////////////////////////// USER ACCOUNT ////////////////////////////////////////////// -->
+
+    <button style="text-align:center;font-size:1.7rem;" class="collapsible">My Account</button>
+    <div class="content wrap-user-account">
+      <br>
+      <div style="display:flex;flex-wrap: wrap; justify-content:center; width:100%">
+    <p></p>
+
+    <!-- ********************************** Without API ******************************************* -->
+    <!-- <form class="form-user-data" style="background:white;width:35rem; padding:2.5rem;" action="/update-user-data" method="post"> -->
+      
+      <!-- *************************************** WITH API ********************************** -->
+        <form class="form-user-data formUserData" style="background:white;width:35rem; padding:2.5rem;" >
+      <li><h1>My Account</h1></li>
+      <p id="updateSuccess_alert" style="color: green; border: 3px solid green;padding:.5rem; text-align: center;" class="hidden"></p>
+      <p id="updateFail_alert"  style="color: red; border: 3px solid red;padding:.5rem; text-align: center;" class="hidden"></p>
+    <li ><label for="name">Name</label></li>
+    <li><input type="text" name="name" id="name" value="<%=user.name%>"required></li>
+                        <li><label for="email"></label>Email</li>
+                        <li><input type="email" name="email" id="email" value="<%=user.email%>" required></li>
+                        <li><br></li>
+                        <li><button class="userpage_Submit" type="submit" name="button">Update
+                                Changes</button></li>
+                        <br>
+                        </form>
+
+
+            </div>
+
+            <br><br>
+
+    </div>
+
+
+
+    <!-- /////////////////////////////////// MY ORDERS ////////////////////////////////////////////// -->
+
+    <button style="text-align:center;font-size:1.7rem;" class="collapsible">My Orders</button>
+    <div class="content wrap-user-account">
+        <br>
+        <div style="flex-wrap: wrap;text-align: center; justify-content:center; width:100%">
+            <br>
+
+            <h1>No Orders To Show</h1> <br>
+            <a style="text-decoration: none;color: white;background-color: black;padding: .8rem; font-size: 1.2rem;"
+                href="/">Start
+                shopping</a>
+
+        </div>
+
+        <br><br>
+
+    </div>
+
+
+
+    <!-- /////////////////////////////////// USER PASSWORD ////////////////////////////////////////////// -->
+
+    <button style="text-align:center;font-size:1.7rem;" class="collapsible">Update Password</button>
+    <div class="content wrap-user-account">
+        <br>
+        <div style="display:flex;flex-wrap: wrap; justify-content:center; width:100%" class="">
+            <br>
+            <form class="form-user-password formUserPassword" style="background:white;width:35rem; padding:2.5rem;">
+                <li>
+                    <h1>Update Password</h1>
+                </li>
+                <p id="updateSuccess_alert2"
+                    style="color: green; border: 3px solid green;padding:.5rem; text-align: center;" class="hidden"></p>
+                <p id="updateFail_alert2" style="color: red; border: 3px solid red;padding:.5rem; text-align: center;"
+                    class="hidden"></p>
+                <br>
+
+                <li><label for="currentPassword"></label>Current Password</li>
+                <li><input type="password" name="currentPassword" id="currentPassword" value=""
+                        placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" onfocus="this.placeholder = ''"
+                        required></li>
+                <li><label for="newPassword"></label>New Password</li>
+                <li><input type="password" name="newPassword" value="" id="newPassword"
+                        placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                        onfocus="this.placeholder = ''" required></li>
+                <li><label for="confirmPassword"></label>Confirm Password</li>
+                <li><input type="password" name="passwordConf" value="" id="passwordConf"
+                        placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#8226;&#8226;"
+                        onfocus="this.placeholder = ''" required>
+                </li>
+                <li><br></li>
+                <li><button class="userpage_Submit updatePass" type="submit" name="button">Save Changes</button></li>
+
+            </form>
+
+        </div>
+        <br><br>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+
+    <script>
+        document.getElementById("buttonOpen").addEventListener("click", openMenu);
+
+        function openMenu() {
+            document.querySelector(".sidebar-mobile").classList.add("open");
+            document.body.style.backgroundColor = " rgba(0,0,0,0.5)";
+            document.body.style.top = "0";
+            document.body.style.overflow = "hidden";
+        }
+        document
+            .querySelector(".sidebar-close-button")
+            .addEventListener("click", closeMenu);
+
+        function closeMenu() {
+            document.querySelector(".sidebar-mobile").classList.remove("open");
+            document.body.style.backgroundColor = "#ebebeb";
+            document.body.style.overflow = "auto";
+        }
+    </script>
+
+    <!--<script>
+        get
+    </script> -->
+
+    <!-- <script src="jquery.min.js"></script>
+      <script src="owl.carousel.min.js" charset="utf-8"></script>
+      <script src="main-page-Carousel.js"></script>-->
+    <!-- <script src="sidebar.js"></script> -->
+    <script src="js/bundle.js"></script>
+</body>
+
+</html>

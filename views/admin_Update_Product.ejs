@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add New Products | Admin Dashboard | IndiCraft</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet"
+        href="https://d19m59y37dris4.cloudfront.net/admin/1-4-6/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/admin/1-4-6/css/fontastic.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="./../css/admin-dashboard.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <!-- Main Navbar-->
+        <header class="header">
+            <nav class="navbar" style="background-color: #194342 !important;">
+                <!-- Search Box-->
+                <div class="search-box">
+                    <button class="dismiss"><i class="icon-close"></i></button>
+                    <form id="searchForm" action="#" role="search">
+                        <input type="search" placeholder="What are you looking for..." class="form-control">
+                    </form>
+                </div>
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <!-- Navbar Header-->
+                        <div class="navbar-header">
+                            <!-- Navbar Brand --><a href="/" class="navbar-brand d-none d-sm-inline-block">
+                                <div class="brand-text d-none d-lg-inline-block"><strong>IndiCraft</strong></div>
+                                <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div>
+                            </a>
+                            <!--  -->
+                        </div>
+                        <!-- Navbar Menu -->
+
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch">
+            <!-- Side Navbar -->
+
+
+
+            <div class="content-inner" style="width:100%;">
+                <!-- Page Header-->
+                <div
+                    style="display:flex;width:100%; align-content: center;margin-left: 10rem; margin-top: 3rem;margin-bottom: 4rem;">
+                    <form class="update_product">
+                        <p class="hidden" id="SuccessAddproduct" style="border:.1rem solid red; width: 80%;"></p>
+                        <fieldset>
+                            <legend>Update/Delete Product</legend>
+                            <br><br>
+                            <div class="form-group">
+                                <label for="productName">Product Title</label>
+                                <input type="text" class="form-control" id="productname" aria-describedby="product"
+                                    placeholder="Enter Product Title" value="<%=result.name%>" required minlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="productCategory">Product Category</label>
+                                <input type="text" class="form-control" id="productcategory"
+                                    aria-describedby="emailHelp" value="<%=result.category%>"
+                                    placeholder="Enter Product Category" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productSubCategory">Product SUBCATEGORY(optional)</label>
+                                <input type="text" class="form-control" id="productSubCategory"
+                                    aria-describedby="emailHelp" value="<%=result.subcategory%>"
+                                    placeholder="Enter Product's SubCategory">
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">Selling Price</label>
+                                <input type="tel" class="form-control" id="productSellPrice"
+                                    aria-describedby="emailHelp" value="<%=result.price%>"
+                                    placeholder="AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">Max Price</label>
+                                <input type="tel" class="form-control" id="productMaxPrice" aria-describedby="emailHelp"
+                                    value="<%=result.maxprice%>" placeholder="AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">AVAILABLE QUANTITY</label>
+                                <input type="tel" class="form-control" id="productAvailableQty"
+                                    aria-describedby="emailHelp" value="<%=result.availableQty%>"
+                                    placeholder="AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productweight">PRODUCT WEIGHT</label>
+                                <input type="tel" class="form-control" id="productweight" aria-describedby="emailHelp"
+                                    value="<%=result.productWeight%>" placeholder=" PRODUCT WEIGHT">
+                            </div>
+                            <div class="form-group">
+                                <label for="productQuantity">Delivery Charge</label>
+                                <input type="tel" class="form-control" id="deliverycharge"
+                                    value="<%=result.deliveryCharge%>" aria-describedby="emailHelp" placeholder="
+                                    AVAILABLE QUANTITY" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productDescription">PRODUCT DESCRIPTION</label>
+                                <textarea type="textarea" class="form-control" id="productDescription"
+                                    aria-describedby="emailHelp" rows="3"
+                                    placeholder="PRODUCT DESCRIPTION"><%=result.productDescription%></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleSelect1">Approved By</label>
+                                <select class="form-control" id="approvedBy">
+                                    <option><%=result.approvedBy%></option>
+                                    <%if(result.approvedBy==="Alok Puri"){%>
+                                    <option>Shashwat Pratap Singh</option>
+                                    <%}else{%>
+                                    <option>Alok Puri </option>
+                                    <%}%>
+                                   
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Enable Display</label>
+                                <select class="form-control" id="enableDisplay">
+                                    <option><%=result.enableDisplay%></option>
+
+                                    <%if(result.enableDisplay==="Yes"){%>
+                                    <option>No</option>
+                                    <%}else{%>
+                                    <option>Yes</option>
+                                    <%}%>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleSelect1">Deal Of Day</label>
+                                <select class="form-control" id="dealOfDay">
+                                    <option><%=result.dealOfDay%></option>
+                                    <%if(result.dealOfDay==="Yes"){%>
+                                    <option>No</option>
+                                    <%}else{%>
+                                    <option>Yes</option>
+                                    <%}%>
+                                </select>
+                            </div>
+
+                            <br>
+                            <h4>Tags</h4>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 1</label><br>
+                                <input type="text" id="tag1" value="<%=result.tag1%>">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 2</label><br>
+                                <input type="text" id="tag2" value="<%=result.tag2%>">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 3</label><br>
+                                <input type="text" id="tag3" value="<%=result.tag3%>">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleSelect1">Tag 4</label><br>
+                                <input type="text" id="tag4" value="<%=result.tag4%>">
+
+                            </div>
+                            <br>
+                            <p style="border: .6rem solid green;padding: .6rem; text-align: center;" id="updateSuccess"
+                                class="hidden"></p>
+                            <p style="border: .6rem solid red;padding: .6rem;" id="updateFail" class="hidden"></p>
+                            <hr style="font-weight: bolder;color: black; font-size: 2em;">
+
+                            <div class="wrap-file" style="display: flex;">
+
+                                <div class="form-group">
+                                    <button type="submit" class="adminUpdateProduct"
+                                        style="padding: 1rem; border-radius: .8rem; background-color: #194342;color: white;border: 1px solid;font-weight: bold;">Update
+                                        Product</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <span
+                                        style="font-size: 1.5rem;font-weight: bolder;color: black;">OR</span>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
+                                <div class="form-group">
+                                    <button class="deleteProduct" style="padding: 1rem; border-radius: .8rem; background-color: #194342;color:
+                                        white;border: 1px solid;font-weight: bold;">Delete
+                                        Product</button>
+
+                                </div>
+
+                                <!-- <div class="form-group">
+                                    <label for="exampleInputFile">Product Image(Thumbnail)</label>
+                                    <input type="file" class="form-control-file" id="exampleInputFile"
+                                        aria-describedby="fileHelp">
+                                    <small id="fileHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputFile">Product Image(Big)</label>
+                                    <input type="file" class="form-control-file" id="exampleInputFile"
+                                        aria-describedby="fileHelp">
+                                    <small id="fileHelp" class="form-text text-muted">For Product Detail Page.</small>
+                                </div> -->
+                            </div>
+                            <hr style="font-weight: bolder;color: black; font-size: 2em;">
+
+                            <!-- <div class="form-group">
+                                <button type="submit" class="submitProduct"
+                                    style="padding: 1rem; border-radius: .8rem; background-color: #194342;color: white;border: 1px solid;font-weight: bold;">Add
+                                    Product</button>
+                                </select>
+                            </div> -->
+                    </form>
+                </div> <!-- Page Footer-->
+                <footer class="main-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>IndiCraft &copy; 2020</p>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <p>Design by <a href="" class="external">ALOK PURI</a></p>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="./../jquery.min.js"></script>
+
+    <script src="./../js/bundle.js"></script>
+</body>
+
+</html>

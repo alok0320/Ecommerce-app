@@ -32,7 +32,6 @@
       z-index: 1;
       margin-bottom: 1rem;
       top: 0;
-
     }
 
     .rightElements {
@@ -47,7 +46,6 @@
 
     .header-links-Login {
       margin-right: 1.5rem;
-
     }
 
     .login-button {
@@ -63,8 +61,6 @@
     /* .dropdown {
       align-items: center;
     } */
-
-
     .head1 {
       font-size: 2.5rem;
     }
@@ -119,7 +115,6 @@
       .rightElements {
         padding-right: 0.08rem;
       }
-
     }
   </style>
 </head>
@@ -169,7 +164,6 @@
             <ul class="cartWrap">
               <% for(var product of products) {%>
               <li class="items odd">
-
                 <div class="infoWrap">
                   <div class="cartSection">
                     <img src="img/22.jpg" alt="" class="itemImg" />
@@ -180,13 +174,9 @@
                         type="text" class="qty" value="<%=product.qty %>"></input><span><a class="incQty"
                           href="/increaseByOne/<%=product.item._id %>">+</a></span> x
                       ₹<%=product.item.price%></p>
-
                     <!-- <span style="font-size:.8rem; margin-left:5px;"> x ₹<%=product.item.price%></span> -->
-
                     <p class="stockStatus"> In Stock</p>
                   </div>
-
-
                   <div class="prodTotal cartSection">
                     <p> <span style="text-decoration: line-through  red ;font-weight: 500; ">
                         ₹<%=product.item.maxprice*(product.qty)%></span><span>₹<%=product.price%></span> </p>
@@ -198,16 +188,13 @@
               </li>
               <%}%>
                 <!--<li class="items even">Item 2</li>-->
-
               </ul>
             </div>
-
             <div class="promoCode"><label for="promo">Have A Promo Code?</label><input type="text" name="promo" class="promocode"
                 placholder="Enter Code" />
               <button type="submit"class="promotest"style="padding:.7rem; font-weight: 900;font-size: 1rem;cursor: pointer; color: white;background-color: #194342;border: none;border-radius: .2rem;">></button>
               <li id="hidden" class="hidden" style="color: green; list-style-type: none;"><strong style="font-weight: 800;"> Coupon Applied!!!</strong> <br><br> You Saved Extra ₹500 in this order</li>
               <li id="hidden2" class="hiddenred" style="color: red; list-style-type: none;"><strong style="font-weight: 800;"> Opps!! Invalid Coupon Code</strong> <br></li>
-
             </div>
 <br>
         <div class="subtotal cf">
@@ -218,10 +205,7 @@
               <li class="totalRow"><span class="label">Shipping</span><span style="color: green;"
                   class="value">FREE</span></li>
               <%}else{%>
-              <li class="totalRow"><span class="label">Shipping</span><span
-                  class="value">₹<%=product.item.deliveryCharge%></span></li>
-
-
+              <li class="totalRow"><span class="label">Shipping</span><span class="value">₹<%=delivery%></span></li>
               <%}%>
               <li class="totalRow"><span class="label">Tax</span><span class="value">₹<%=(product.price/100)*8%></span>
               </li>
@@ -233,7 +217,8 @@
               </li>
               <li class="totalRow final"><span class="label">Total</span><span
                   style="text-decoration: line-through  red; color: maroon; font-weight: 500;"
-                  class="value">₹</span><br><span class="veryfinal" style="color: black;">₹<%=finalprice%></span>
+                  class="value">₹<%=finalprice+delivery+discount%></span><br><span class="veryfinal"
+                  style="color: black;">₹<%=finalprice%></span>
               </li>
               <%if(user===0){%>
               <li class="totalRow"><a href="/login" class="btn continue">Place Order</a></li>
@@ -244,7 +229,6 @@
           </div>
         </div>
         <%} else{%>
-
               <div class="empty-cart" style="text-align: center; margin-top: 8rem;">
                 <h1 class="head1">No Items In Cart</h1>
                 <br><br><br>
@@ -265,9 +249,7 @@
     $('a.remove').click(function () {
       event.preventDefault();
       $(this).parent().parent().parent().hide(400);
-
     })
-
     // Just for testing, show all items
     $('a.btn.continue').click(function () {
       $('li.items').show(400);
@@ -277,10 +259,6 @@
  <script>
  
 </script>
-
 <script src="js/bundle.js"></script>
-
-
 </body>
-
 </html>

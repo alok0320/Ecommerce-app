@@ -26451,7 +26451,6 @@ var login = /*#__PURE__*/function () {
             console.log(res.data.status);
 
             if (res.data.status === "Success") {
-              alert("Logged In Successfully");
               location.assign("/");
             }
 
@@ -26506,7 +26505,6 @@ var signup = /*#__PURE__*/function () {
             console.log(res.data.status);
 
             if (res.data.status === "Success") {
-              alert("Account Created Successfully");
               location.assign("/");
             }
 
@@ -26610,7 +26608,7 @@ var updateSettings = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            url = type === 'password' ? 'http://localhost:8000/alok/api/v1/users/updateMyPassword' : 'http://localhost:8000/alok/api/v1/users/updateMe';
+            url = type === 'password' ? 'http://localhost:5000/alok/api/v1/users/updateMyPassword' : 'http://localhost:5000/alok/api/v1/users/updateMe';
             _context.next = 4;
             return (0, _axios.default)({
               method: 'PATCH',
@@ -26945,7 +26943,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var addproduct = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo) {
     var res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -26967,7 +26965,8 @@ var addproduct = /*#__PURE__*/function () {
                 deliveryCharge: deliveryCharge,
                 productDescription: productDescription,
                 approvedBy: approvedBy,
-                enableDisplay: enableDisplay
+                enableDisplay: enableDisplay,
+                photo: photo
               }
             });
 
@@ -27006,7 +27005,7 @@ var addproduct = /*#__PURE__*/function () {
     }, _callee, null, [[0, 9]]);
   }));
 
-  return function addproduct(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11) {
+  return function addproduct(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -27082,7 +27081,7 @@ var editProduct = /*#__PURE__*/function () {
     }, _callee2, null, [[0, 10]]);
   }));
 
-  return function editProduct(_x12, _x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20, _x21, _x22, _x23, _x24, _x25, _x26, _x27) {
+  return function editProduct(_x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20, _x21, _x22, _x23, _x24, _x25, _x26, _x27, _x28) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -27111,6 +27110,7 @@ var userpasswordForm = document.querySelector(".formUserPassword");
 var addnewproduct = document.querySelector(".add_new_product");
 var updateProduct = document.querySelector(".update_product");
 var deleteProductBtn = document.getElementById("deleteProduct");
+var $form = document.getElementById("checkoutform");
 
 if (loginform) {
   loginform.addEventListener("submit", function (e) {
@@ -27246,7 +27246,8 @@ if (addnewproduct) {
     var productDescription = document.getElementById("productDescription").value;
     var approvedBy = document.getElementById("approvedBy").value;
     var enableDisplay = document.getElementById("enableDisplay").value;
-    (0, _adminProductOperation.addproduct)(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay);
+    var photo = document.getElementById("photo").value;
+    (0, _adminProductOperation.addproduct)(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo);
     document.querySelector(".submitProduct").innerHTML = "Add Product";
   });
 }
@@ -27301,7 +27302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37189" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37563" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -91,7 +91,14 @@
                     <div class="container-fluid">
                         <h2 class="no-margin-bottom">Dashboard</h2>
                     </div>
-                </header>
+                </header><br>
+                <form style="margin-left: 2rem;" action="" method="post">
+                    <label for="Category">Create New Category</label><br>
+                    <input style="padding: .7rem;border-radius: 1rem; border: 1px solid grey;" type="text">
+                    <button
+                        style="padding: .85rem; color: white;background-color: #194342;border: thin; border-radius: 1rem;"
+                        type="submit">Create </button>
+                </form>
                 <div
                     style="display:flex;width:100%; align-content: center;margin-left: 10rem; margin-top: 3rem;margin-bottom: 4rem;">
                     <form class="add_new_product">
@@ -205,7 +212,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">Product Image(Big)</label>
-                                    <input type="file" class="form-control-file" id="exampleInputFile"
+                                    <input type="file" name="photo" class="form-control-file" id="photo"
                                         aria-describedby="fileHelp">
                                     <small id="fileHelp" class="form-text text-muted">For Product Detail Page.</small>
                                 </div>

@@ -38,6 +38,10 @@
       font-size: 1.1rem;
     }
 
+    .hidden {
+      display: none;
+    }
+
     .button {
       background-color: #194342;
     }
@@ -122,12 +126,24 @@
             <span class="text-muted">₹<%=products.totalPrice%></span>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-condensed">
+
             <div>
               <h6 class="my-0">Delivery Fee</h6>
             </div>
-            <span class="text-muted">₹100</span>
-          </li>
+            <%if(products.totalPrice>5500){%>
+            <span class="text-muted" style="color: green;font-weight: bold;">FREE</span>
+            <%}else{%>
 
+            <span class="text-muted">₹200</span>
+            <%}%>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">Tax</h6>
+              <!-- <small class="text-muted">Brief description</small> -->
+            </div>
+            <span class="text-muted">₹<%=products.totalPrice*0.08%></span>
+          </li>
           <!-- <li class="list-group-item d-flex justify-content-between bg-light">
             <div class="text-success">
               <h6 class="my-0">Promo code</h6>
@@ -136,11 +152,12 @@
             <span class="text-success">-$5</span>
           </li> -->
           <li class="list-group-item d-flex justify-content-between">
-            <span>Total (₹)</span>
-            <strong>₹<%=products.totalPrice+100%></strong>
+            <span><b>Total </b></span>
+            <strong>₹<%=products.finalprice%></strong>
           </li>
           <li class="list-group-item d-flex justify-content-between">
-            <span style="color:green;">You Saved ₹1000 in this Order🎉</span>
+            <span style="color:green;">You Saved <b style="font-size: 1.18rem;">₹<%=products.discount%></b> in this
+              Order🎉</span>
 
           </li>
         </ul>
@@ -158,19 +175,20 @@
 
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Shipping address</h4>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" method="POST" id="checkoutform" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">Name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="Ex:- Akshay Kumar" value="" required>
+              <input type="text" class="form-control" name="name" id="firstName" placeholder="Ex:- Alok" value=""
+                required>
               <div class="invalid-feedback">
                 Name is required.
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="lastName">Mobile No.</label>
-              <input type="tel" class="form-control" id="lastName" placeholder="9xxxx xxxxx" value="" maxlength="10"
-                required>
+              <input type="tel" name="mobileNumber." class="form-control" id="lastName" placeholder="9xxxx xxxxx"
+                value="" maxlength="10" required>
               <div class="invalid-feedback">
                 Please Enter a Valid Mobile Number
               </div>
@@ -192,30 +210,50 @@
 
           <div class="mb-3">
             <label for="email">Email <span class="text-muted"></span></label>
-            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            <input type="email" class="form-control" id="email" required>
             <div class="invalid-feedback">
               Please enter a valid email address for shipping updates.
             </div>
           </div>
 
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="address">Address</label>
-            <input type="text-area" class="form-control" id="address" placeholder="1234 Main St" required>
+            <input type="text-area" name="address" class="form-control" id="address" placeholder="1234 Main St"
+              required>
             <div class="invalid-feedback">
               Please enter your shipping address.
             </div>
+          </div> -->
+          <div class="row">
+            <div class="col-md-8 mb-3">
+              <label for="country">Address</label>
+              <input type="text-area" name="address" class="form-control" id="address"
+                placeholder="EX:- B/32, Xtz Building Rajnagar" required>
+              <div class="invalid-feedback">
+                Please enter a valid Address.
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="country">City</label>
+              <input type="text-area" name="city" class="form-control" id="address" placeholder="Ex:- Ghaziabad"
+                required>
+
+              <div class="invalid-feedback">
+                Please enter a valid city.
+              </div>
+            </div>
           </div>
 
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
             <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-          </div>
+          </div> -->
 
           <div class="row">
             <div class="col-md-5 mb-3">
               <label for="country">Country</label>
-              <select class="custom-select d-block w-100" id="country" required>
-                <option value="">Choose...</option>
+              <select class="custom-select d-block w-100" value="hssh" name="country" id="country" required>
+                <!-- <option value=""></option> -->
                 <option>INDIA</option>
               </select>
               <div class="invalid-feedback">
@@ -224,7 +262,7 @@
             </div>
             <div class="col-md-4 mb-3">
               <label for="state">State</label>
-              <select class="custom-select d-block w-100" id="state" required>
+              <select class="custom-select d-block w-100" name="state" id="state" required>
                 <option value="">Choose...</option>
                 <option>UP</option>
                 <option>Delhi</option>
@@ -235,7 +273,7 @@
             </div>
             <div class="col-md-3 mb-3">
               <label for="zip">Zip/Pin Code</label>
-              <input type="tel" class="form-control" id="zip" maxlength="6" placeholder="201004" required>
+              <input type="tel" class="form-control" name="pin" id="zip" maxlength="6" placeholder="201004" required>
               <div class="invalid-feedback">
                 Zip code required.
               </div>
@@ -283,7 +321,7 @@
               <label class="custom-control-label" for="debit">Cash on Delivery</label>
             </div>
           </div>
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-md-6 mb-3">
               <label for="cc-name">Name on card</label>
               <input type="text" class="form-control" id="cc-name" name="nameOnCard" placeholder="" required>
@@ -302,10 +340,20 @@
             </div>
           </div>
           <div class="row">
+            <!-- <div class="form-group col-md-1">
+              <label for="inputState">State</label>
+              <input type="tel" class="form-control" maxlength="2">
+            </div>
+
+            <div class="form-group ml-0 col-md-1">
+              <label for="inputZip">&nbsp;</label>
+              <input type="text" class="form-control" id="inputZip">
+            </div> -->
+
             <div class="col-md-4 mb-3">
               <label for="cc-expiration">Expiration</label>
-              <input id="cc-exp" type="month" class="input-lg form-control cc-exp" name="expiry" autocomplete="cc-exp"
-                placeholder="•• / ••" required>
+              <input id="cc-exp" type="month" class="input-lg form-control cc-exp" id="expiry" name="expiry"
+                autocomplete="cc-exp" placeholder="•• / ••" required>
 
               <div class="invalid-feedback">
                 Expiration date required
@@ -319,24 +367,36 @@
                 Security code required
               </div>
             </div>
-          </div> -->
+          </div>
           <hr class="mb-4">
+          <div id="card-element">
+            <!-- A Stripe Element will be inserted here. -->
+          </div>
           <button class="btn btn-primary btn-lg btn-block button" type="submit"><i class="fas fa-lock"></i> &nbsp;
             Proceed to
             Payment</button>
+          <br>
+          <div id="charge_error" class="alert alert-danger hidden"></div>
         </form>
       </div>
     </div>
 
     <footer class="my-5 pt-5 text-muted text-center text-small">
-      <!-- <p class="mb-1">&copy; 2017-2020 Company Name</p>
+
+    </footer>
+  </div>
+  <!-- <p class="mb-1">&copy; 2017-2020 Company Name</p>
       <ul class="list-inline">
         <li class="list-inline-item"><a href="#">Privacy</a></li>
         <li class="list-inline-item"><a href="#">Terms</a></li>
         <li class="list-inline-item"><a href="#">Support</a></li>
       </ul> -->
-    </footer>
-  </div>
+  <script src="jquery.min.js"></script>
+  <script src="checkout_validation.js"></script>
+  <!-- <script src="https://js.stripe.com/v3/"></script> -->
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <script src="sF_End.js"></script>
+  <script src="js/bundle.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
   </script> -->
@@ -349,10 +409,6 @@
   <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script> -->
   <!-- <script src="form-validation.js"></script> -->
-
-  <script src="jquery.min.js"></script>
-  <script src="checkout_validation.js"></script>
-  <script src="https://js.stripe.com/v3/"></script>
 
 </body>
 

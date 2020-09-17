@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import axios from 'axios';
 
-export const addproduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay) => {
+export const addproduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo) => {
     // var ws = new WebSocket("ws://localhost:3000/alok/api/v1/login");
     try {
         const res = await axios({
@@ -18,7 +18,8 @@ export const addproduct = async (name, price, maxprice, category, subcategory, a
                 deliveryCharge,
                 productDescription,
                 approvedBy,
-                enableDisplay
+                enableDisplay,
+                photo
             },
 
         });
@@ -48,7 +49,7 @@ export const addproduct = async (name, price, maxprice, category, subcategory, a
 
 };
 
-export const editProduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4) => {
+export const editProduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4, ) => {
     try {
         const url = (window.location.href).toLowerCase()
         const obj = new URL(url);
@@ -73,7 +74,8 @@ export const editProduct = async (name, price, maxprice, category, subcategory, 
                 tag1,
                 tag2,
                 tag3,
-                tag4
+                tag4,
+
             },
 
         });

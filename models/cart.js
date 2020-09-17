@@ -7,6 +7,7 @@ module.exports = function Cart(oldCart) {
     this.finalprice = oldCart.finalprice || 0;
     this.predis = oldCart.predis || 0;
     this.discount = oldCart.discount || 0;
+    this.delivery = oldCart.delivery || 0;
 
     this.add = function (item, id) {
         var storedItem = this.items[id];
@@ -24,9 +25,11 @@ module.exports = function Cart(oldCart) {
         // storedItem.fakeprice = storedItem.item.maxprice * storedItem.qty
         this.totalQty++;
         this.totalPrice += storedItem.item.price;
-        this.finalprice = this.totalPrice + (this.totalPrice * 0.08)
         this.predis += storedItem.item.maxprice;
         this.discount = this.predis - this.totalPrice;
+        this.delivery = this.totalPrice > 5500 ? 0 : 200;
+        this.finalprice = this.totalPrice + (this.totalPrice * 0.08) + this.delivery
+
         // this.fakeprice += storedItem.item.maxprice;
 
 
@@ -37,7 +40,8 @@ module.exports = function Cart(oldCart) {
         this.items[id].price -= this.items[id].item.price;
         this.totalQty--;
         this.totalPrice -= this.items[id].item.price;
-        this.finalprice = this.totalPrice + (this.totalPrice * 0.08)
+        this.delivery = this.totalPrice > 5500 ? 0 : 200;
+        this.finalprice = this.totalPrice + (this.totalPrice * 0.08) + this.delivery
         this.predis -= this.items[id].item.maxprice;
         this.discount = this.predis - this.totalPrice;
 
@@ -53,7 +57,8 @@ module.exports = function Cart(oldCart) {
         this.items[id].price += this.items[id].item.price;
         this.totalQty++;
         this.totalPrice += this.items[id].item.price;
-        this.finalprice = this.totalPrice + (this.totalPrice * 0.08)
+        this.delivery = this.totalPrice > 5500 ? 0 : 200;
+        this.finalprice = this.totalPrice + (this.totalPrice * 0.08) + this.delivery
         this.predis += this.items[id].item.maxprice;
         this.discount = this.predis - this.totalPrice;
 

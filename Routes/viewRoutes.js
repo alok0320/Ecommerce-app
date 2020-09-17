@@ -22,6 +22,9 @@ router.get('/login', viewsController.login);
 router.get('/signup', viewsController.signup);
 
 router.get('/checkout', authController.protect, viewsController.getCheckout);
+router.post('/checkout', authController.protect, viewsController.postCheckout);
+
+
 
 // Admin Routes (Only for Admins)
 router.get('/admin-dashboard', authController.protect, authController.restrictTo("admin"), viewsController.adminDashboard);

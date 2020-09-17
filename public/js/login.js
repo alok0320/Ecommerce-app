@@ -17,7 +17,6 @@
          });
          console.log(res.data.status);
          if (res.data.status === "Success") {
-             alert("Logged In Successfully");
              location.assign("/")
          }
 
@@ -49,7 +48,6 @@
          });
          console.log(res.data.status);
          if (res.data.status === "Success") {
-             alert("Account Created Successfully");
              location.assign("/")
          }
 

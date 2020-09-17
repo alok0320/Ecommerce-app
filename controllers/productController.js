@@ -47,7 +47,7 @@ exports.addNewProduct = catchAsync(async (req, res, next) => {
 
   const newProduct = await Product.create({
     name: req.body.name,
-    price: req.body.price + req.body.deliveryCharge,
+    price: req.body.price,
     maxprice: req.body.maxprice,
     category: req.body.category,
     subcategory: req.body.subcategory,
@@ -58,7 +58,6 @@ exports.addNewProduct = catchAsync(async (req, res, next) => {
     approvedBy: req.body.approvedBy,
     enableDisplay: req.body.enableDisplay,
     manufactured_State: req.body.manufactured_State,
-    photo: req.body.photo,
 
   });
 

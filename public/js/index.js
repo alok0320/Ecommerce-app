@@ -12,8 +12,7 @@ import {
 import {
     addproduct,
     editProduct
-} from './adminProductOperation'
-
+} from './adminProductOperation';
 
 const promocode = document.querySelector(".promotest")
 const loginform = document.querySelector(".form");
@@ -25,6 +24,7 @@ const userpasswordForm = document.querySelector(".formUserPassword");
 const addnewproduct = document.querySelector(".add_new_product");
 const updateProduct = document.querySelector(".update_product")
 const deleteProductBtn = document.getElementById("deleteProduct")
+const $form = document.getElementById("checkoutform")
 
 
 if (loginform) {
@@ -160,8 +160,10 @@ if (addnewproduct) {
         const productDescription = document.getElementById("productDescription").value;
         const approvedBy = document.getElementById("approvedBy").value;
         const enableDisplay = document.getElementById("enableDisplay").value;
+        const photo = document.getElementById("photo").value;
 
-        addproduct(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay)
+
+        addproduct(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo)
         document.querySelector(".submitProduct").innerHTML = "Add Product"
 
 

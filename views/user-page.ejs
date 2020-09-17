@@ -6,6 +6,8 @@
     <title>IndiCraft | User Dashboard</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
@@ -25,9 +27,29 @@
     <link rel="stylesheet" href="css/mainStyle.css" />
     <style media="screen">
         /* *******************************************COLAPSABLE****************************** */
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            border: none;
+        }
+
+        /* td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        } */
+
+        /* tr:nth-child(even) {
+  background-color: #dddddd;
+} */
+
+
         .hidden {
             display: none;
         }
+
 
         .form-user-data {
             -webkit-box-shadow: 2px 2px 49px 4px rgba(20, 18, 20, 0.09);
@@ -149,7 +171,7 @@
             color: black;
             padding: 14px 20px;
             font-size: 1rem;
-            width: 81.5%;
+            width: 100%;
             text-decoration: none;
             display: block;
         }
@@ -165,6 +187,10 @@
         @media only screen and (max-width: 720px) {
 
             .dropdown {
+                display: none;
+            }
+
+            .mob {
                 display: none;
             }
 
@@ -189,7 +215,7 @@
             justify-content: space-between;
         }
 
-        .card:hover {
+        .sidebar .card:hover {
             -webkit-box-shadow: 1px 6px 10px 8px rgba(184, 178, 184, 0.95);
             -moz-box-shadow: 1px 6px 10px 8px rgba(184, 178, 184, 0.95);
             box-shadow: 1px 6px 10px 8px rgba(184, 178, 184, 0.95);
@@ -366,7 +392,7 @@
 
       <!-- ********************************************************* Sidebar (For Mobile)********************************* -->
 
-      <aside class="sidebar-mobile" style="z-index: 1; top: 0">
+      <aside class="sidebar-mobile" style="z-index: 999999999; top: 0">
         <h2 class="top-sidebar-mobile">
           <%if(user===0){%>
                 <a href="/login"><i class="material-icons">person</i>Hello, SignIn</a>
@@ -428,24 +454,31 @@
     <!-- ****************************************************************** Main Starts**************************************** -->
 <br><br>
 
-<!-- /////////////////////////////////// USER ACCOUNT ////////////////////////////////////////////// -->
 
-    <button style="text-align:center;font-size:1.7rem;" class="collapsible">My Account</button>
-    <div class="content wrap-user-account">
-      <br>
-      <div style="display:flex;flex-wrap: wrap; justify-content:center; width:100%">
-    <p></p>
+            <!-- /////////////////////////////////// USER ACCOUNT ////////////////////////////////////////////// -->
 
-    <!-- ********************************** Without API ******************************************* -->
-    <!-- <form class="form-user-data" style="background:white;width:35rem; padding:2.5rem;" action="/update-user-data" method="post"> -->
-      
-      <!-- *************************************** WITH API ********************************** -->
-        <form class="form-user-data formUserData" style="background:white;width:35rem; padding:2.5rem;" >
-      <li><h1>My Account</h1></li>
-      <p id="updateSuccess_alert" style="color: green; border: 3px solid green;padding:.5rem; text-align: center;" class="hidden"></p>
-      <p id="updateFail_alert"  style="color: red; border: 3px solid red;padding:.5rem; text-align: center;" class="hidden"></p>
-    <li ><label for="name">Name</label></li>
-    <li><input type="text" name="name" id="name" value="<%=user.name%>"required></li>
+            <button style="text-align:center;font-size:1.7rem;" class="collapsible">My Account</button>
+            <div class="content wrap-user-account">
+                <br>
+                <div style="display:flex;flex-wrap: wrap; justify-content:center; width:100%">
+                    <p></p>
+
+                    <!-- ********************************** Without API ******************************************* -->
+                    <!-- <form class="form-user-data" style="background:white;width:35rem; padding:2.5rem;" action="/update-user-data" method="post"> -->
+
+                    <!-- *************************************** WITH API ********************************** -->
+                    <form class="form-user-data formUserData" style="background:white;width:35rem; padding:2.5rem;">
+                        <li>
+                            <h1>My Account</h1>
+                        </li><br>
+                        <p id="updateSuccess_alert"
+                            style="color: green; border: 3px solid green;padding:.5rem; text-align: center;"
+                            class="hidden"></p>
+                        <p id="updateFail_alert"
+                            style="color: red; border: 3px solid red;padding:.5rem; text-align: center;" class="hidden">
+                        </p>
+                        <li style="height: 24px;"><label for="name">Name</label></li>
+                        <li><input type="text" name="name" id="name" value="<%=user.name%>" required></li>
                         <li><label for="email"></label>Email</li>
                         <li><input type="email" name="email" id="email" value="<%=user.email%>" required></li>
                         <li><br></li>
@@ -466,62 +499,269 @@
     <!-- /////////////////////////////////// MY ORDERS ////////////////////////////////////////////// -->
 
     <button style="text-align:center;font-size:1.7rem;" class="collapsible">My Orders</button>
-    <div class="content wrap-user-account">
+    <div class="content wrap-user-account ">
+
+
+
         <br>
+
+        <div class="">
+            <%order.forEach(function(order){%>
+            <div style="display:flex;flex-wrap: wrap; justify-content:center; width:100%" class="tesu">
+
+                <br>
+                <form class="form-user-password formUserPassword" style="background:white;width:50rem; padding:1rem ;">
+
+                    <!-- //Progress Bar Starts ****************************************** -->
+                    <%if(order.status==="orderPlaced"){%>
+
+                    <p style="color: red;text-align: center;"><i class="fas fa-exclamation-triangle"></i> You will
+                        not
+                        be able to cancel your Order once the order is DISPATCHED</p>
+                    <div class="progressbar">
+                        <hr>
+                        <span
+                            style="display: flex;justify-content: space-between; align-items: center;border-radius: 3rem;">
+                            <span
+                                style="width: 33.33% ;background-color: greenyellow;border-radius:1rem 0rem 0rem 1rem; display: flex;justify-content: space-between;align-items: center;"
+                                class="orderPlaced">
+                                &nbsp;&nbsp;Order
+                                Placed <i style="font-size: 2rem; color: black;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                            <span
+                                style="width: 33.33%;display: flex;background-color: #f0f0f0;justify-content: space-between;align-items: center;"
+                                class="orderDispatch">&nbsp;&nbsp;&nbsp;Order
+                                Dispatched<i style="font-size: 2rem; color: #f0f0f0;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span
+                                style="width: 33.33%;display: flex;justify-content: space-between;background-color: #f0f0f0;align-items: center;border-radius: 0rem 1rem 1rem 0rem;"
+                                class="Delivered">&nbsp;&nbsp;&nbsp;Order Delivered<i
+                                    style="font-size: 2rem;color: #f0f0f0;;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                        <hr>
+                    </div> <br>
+
+
+                    <%}%>
+
+<%if(order.status==="orderDispatched"){%>
+                    <div class="progressbar">
+                        <hr>
+                        <span
+                            style="display: flex;justify-content: space-between; align-items: center;border-radius: 3rem;">
+                            <span
+                                style="width: 33.33% ;border-radius:1rem 0rem 0rem 1rem; background-color: greenyellow;display: flex;justify-content: space-between;align-items: center;"
+                                class="orderPlaced">
+                                &nbsp;&nbsp;Order
+                                Placed <i style="font-size: 2rem; color: black;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                            <span
+                                style="width: 33.33%;display: flex;justify-content: space-between;background-color: greenyellow;align-items: center;"
+                                class="orderDispatch">&nbsp;&nbsp;&nbsp;Order
+                                Dispatched<i style="font-size: 2rem; color: black;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span
+                                style="width: 33.33%;display: flex;justify-content: space-between;background-color: #f0f0f0; align-items: center;border-radius: 0rem 1rem 1rem 0rem;"
+                                class="Delivered">&nbsp;&nbsp;&nbsp;Order Delivered<i
+                                    style="font-size: 2rem;color: #f0f0f0;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                        <hr>
+                    </div> <br>
+
+                    <%}%>
+
+
+<%if(order.status==="delivered"){%>
+
+
+                    <div class="progressbar">
+                        <hr>
+                        <span
+                            style="display: flex;justify-content: space-between; align-items: center;border-radius: 3rem;">
+                            <span
+                                style="width: 33.33% ;background-color: greenyellow;border-radius:1rem 0rem 0rem 1rem; display: flex;justify-content: space-between;align-items: center;"
+                                class="orderPlaced">
+                                &nbsp;&nbsp;Order
+                                Placed <i style="font-size: 2rem; color: black;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                            <span
+                                style="width: 33.33%;display: flex; background-color: greenyellow;justify-content: space-between;align-items: center;"
+                                class="orderDispatch">&nbsp;&nbsp;&nbsp;Order
+                                Dispatched<i style="font-size: 2rem; color: black;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span
+                                style="width: 33.33%;display: flex; background-color: greenyellow; justify-content: space-between;align-items: center;border-radius: 0rem 1rem 1rem 0rem;"
+                                class="Delivered">&nbsp;&nbsp;&nbsp;Order Delivered<i
+                                    style="font-size: 2rem;color: black;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+                        <hr>
+                    </div> <br>
+                    <%}%>
+                    <!-- //Progress Bar Ends ****************************************** -->
+
+
+                    <p style="display: flex; justify-content: space-between;">
+                        <%if(order.status==="delivered"){%>
+                    <span style="color: green;font-weight: bold; text-decoration: yellowgreen;">
+                        <%=(order.status).toUpperCase()%> <br>
+                    </span>
+                    <%}%>
+                    <span style="padding-left: .2rem;">
+                        <b> TransactionID :</b> <%=order.paymentId%>
+
+                    <br>
+                    <b> OrderID</b>: <%=order.id%>
+                    <%let ts=new Date(order.createdAt)%>
+                    <br><b>Order Date</b>: <%=ts.toLocaleDateString("en-GB")%>
+                    </span> </p>
+
+                    <!-- <ul
+                        style="display: flex; justify-content: space-around; background-color: #194342;align-items: center;color: white;font-weight: bold; align-items: center;">
+                        <li class="mob"> ss</li>&nbsp;
+                        <li>Product Name</li>
+                        <li>Qty</li>
+                        <li>Price</li>
+                    </ul> -->
+
+
+                    <table class="table">
+                        <thead>
+                            <tr style="background-color: teal;color: white;">
+                                <th scope="col"></th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%(order.items).forEach(function(item){%>
+
+                            <tr style="background-color: #f0f0f0; padding-bottom: 2px;">
+                                <!-- <th scope="row">1</th> -->
+                                <td><img style="width: 5rem;height: 6rem;" src="img/22.jpg" alt="" srcset="">
+                                </td>
+                                <td><%=item.item.name%></td>
+                                <td><%=item.qty%></td>
+                                <td>₹<%=item.price%></td>
+
+                            </tr>
+
+                            <!-- <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                            </tr> -->
+                            <%})%>
+                        </tbody>
+                    </table>
+                    <br>
+
+                    <div style="display: flex;justify-content: space-between;">
+
+                        <ul>
+
+                            <li style="margin-bottom: 4px;"><b> Address:</b></li>
+                            <li>Name :<b> <%= (order.name).toUpperCase()%></b></li>
+                            <li><%=order.address.address%></li>
+                            <li><%=order.address.city +",  " + order.address.pin%>
+                            </li>
+                            <li><%= order.address.state+ ", "+" "+ order.address.country%></li>
+
+                        </ul>
+
+                        <ul style="padding-right: .5rem; ">
+                            <li style="margin-bottom: 4px;"><b> Bill:-</b></li>
+                            <li style="padding-bottom: .2rem;">SubTotal : ₹<%=order.cart.totalPrice%></li>
+
+                            <li style="padding-bottom: .2rem;">Delivery : ₹<%=order.cart.delivery%></li>
+                            <li style="padding-bottom: .2rem;">Tax
+                                :₹<%=(order.cart.totalPrice*0.08)%></li>
+                            <li style="padding-bottom: .2rem;font-size: 1.1rem;"><b>Total :<span style="color: green;">
+                                        ₹<%=order.cart.finalprice%></li></span></b>
+                            </li>
+                        </ul>
+                    </div>
+                    <%if(order.status==="orderPlaced"){%>
+                    <button
+                        style="border-radius: 2rem;padding: .5rem;background-color: #f0f0f0; border :1px outset black"
+                        class="cancleOrder">Cancel Order</button>
+                    <%}%>
+                </form>
+
+            </div>
+            <br>
+            <%})%>
+
+
+                    <!-- 
         <div style="flex-wrap: wrap;text-align: center; justify-content:center; width:100%">
             <br>
 
-            <h1>No Orders To Show</h1> <br>
+
+             <h1>No Orders To Show</h1> <br>
             <a style="text-decoration: none;color: white;background-color: black;padding: .8rem; font-size: 1.2rem;"
                 href="/">Start
                 shopping</a>
 
+        </div>  -->
+
+                    <br><br>
+                    <br>
+
+            </div>
+
         </div>
+        <!-- /////////////////////////////////// USER PASSWORD ////////////////////////////////////////////// -->
 
-        <br><br>
-
-    </div>
-
-
-
-    <!-- /////////////////////////////////// USER PASSWORD ////////////////////////////////////////////// -->
-
-    <button style="text-align:center;font-size:1.7rem;" class="collapsible">Update Password</button>
-    <div class="content wrap-user-account">
-        <br>
-        <div style="display:flex;flex-wrap: wrap; justify-content:center; width:100%" class="">
+        <button style="text-align:center;font-size:1.7rem;" class="collapsible">Update Password</button>
+        <div class="content wrap-user-account">
             <br>
-            <form class="form-user-password formUserPassword" style="background:white;width:35rem; padding:2.5rem;">
-                <li>
-                    <h1>Update Password</h1>
-                </li>
-                <p id="updateSuccess_alert2"
-                    style="color: green; border: 3px solid green;padding:.5rem; text-align: center;" class="hidden"></p>
-                <p id="updateFail_alert2" style="color: red; border: 3px solid red;padding:.5rem; text-align: center;"
-                    class="hidden"></p>
+            <div style="display:flex;flex-wrap: wrap; justify-content:center; width:100%" class="">
                 <br>
+                <form class="form-user-password formUserPassword" style="background:white;width:35rem; padding:2.5rem;">
+                    <li>
+                        <h1>Update Password</h1>
+                    </li>
+                    <p id="updateSuccess_alert2"
+                        style="color: green; border: 3px solid green;padding:.5rem; text-align: center;" class="hidden">
+                    </p>
+                    <p id="updateFail_alert2"
+                        style="color: red; border: 3px solid red;padding:.5rem; text-align: center;" class="hidden">
+                    </p>
+                    <br>
 
-                <li><label for="currentPassword"></label>Current Password</li>
-                <li><input type="password" name="currentPassword" id="currentPassword" value=""
-                        placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" onfocus="this.placeholder = ''"
-                        required></li>
-                <li><label for="newPassword"></label>New Password</li>
-                <li><input type="password" name="newPassword" value="" id="newPassword"
-                        placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
-                        onfocus="this.placeholder = ''" required></li>
-                <li><label for="confirmPassword"></label>Confirm Password</li>
-                <li><input type="password" name="passwordConf" value="" id="passwordConf"
-                        placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#8226;&#8226;"
-                        onfocus="this.placeholder = ''" required>
-                </li>
-                <li><br></li>
-                <li><button class="userpage_Submit updatePass" type="submit" name="button">Save Changes</button></li>
+                    <li><label for="currentPassword"></label>Current Password</li>
+                    <li><input type="password" name="currentPassword" id="currentPassword" value=""
+                            placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                            onfocus="this.placeholder = ''" required></li>
+                    <li><label for="newPassword"></label>New Password</li>
+                    <li><input type="password" name="newPassword" value="" id="newPassword"
+                            placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"
+                            onfocus="this.placeholder = ''" required></li>
+                    <li><label for="confirmPassword"></label>Confirm Password</li>
+                    <li><input type="password" name="passwordConf" value="" id="passwordConf"
+                            placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#8226;&#8226;"
+                            onfocus="this.placeholder = ''" required>
+                    </li>
+                    <li><br></li>
+                    <li><button class="userpage_Submit updatePass" type="submit" name="button">Save Changes</button>
+                    </li>
 
-            </form>
+                </form>
 
+            </div>
+            <br><br>
         </div>
-        <br><br>
-    </div>
 
 
 
@@ -543,53 +783,44 @@
 
 
 
+        <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
 
-    <script>
-        var coll = document.getElementsByClassName("collapsible");
-        var i;
+            for (i = 0; i < coll.length; i++) {
+                coll[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                    }
+                });
+            }
+        </script>
 
-        for (i = 0; i < coll.length; i++) {
-            coll[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var content = this.nextElementSibling;
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                }
-            });
-        }
-    </script>
+        <script>
+            document.getElementById("buttonOpen").addEventListener("click", openMenu);
 
-    <script>
-        document.getElementById("buttonOpen").addEventListener("click", openMenu);
+            function openMenu() {
+                document.querySelector(".sidebar-mobile").classList.add("open");
+                document.body.style.backgroundColor = " rgba(0,0,0,0.5)";
+                document.body.style.top = "0";
+                document.body.style.overflow = "hidden";
+            }
+            document
+                .querySelector(".sidebar-close-button")
+                .addEventListener("click", closeMenu);
 
-        function openMenu() {
-            document.querySelector(".sidebar-mobile").classList.add("open");
-            document.body.style.backgroundColor = " rgba(0,0,0,0.5)";
-            document.body.style.top = "0";
-            document.body.style.overflow = "hidden";
-        }
-        document
-            .querySelector(".sidebar-close-button")
-            .addEventListener("click", closeMenu);
+            function closeMenu() {
+                document.querySelector(".sidebar-mobile").classList.remove("open");
+                document.body.style.backgroundColor = "#ebebeb";
+                document.body.style.overflow = "auto";
+            }
+        </script>
 
-        function closeMenu() {
-            document.querySelector(".sidebar-mobile").classList.remove("open");
-            document.body.style.backgroundColor = "#ebebeb";
-            document.body.style.overflow = "auto";
-        }
-    </script>
-
-    <!--<script>
-        get
-    </script> -->
-
-    <!-- <script src="jquery.min.js"></script>
-      <script src="owl.carousel.min.js" charset="utf-8"></script>
-      <script src="main-page-Carousel.js"></script>-->
-    <!-- <script src="sidebar.js"></script> -->
-    <script src="js/bundle.js"></script>
+        <script src="js/bundle.js"></script>
 </body>
 
 </html>

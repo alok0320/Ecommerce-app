@@ -158,6 +158,12 @@ exports.getUserPage = async (req, res, next) => {
     });
 };
 // ********************************************************ADMIN AREA CONTROLLER*********************
+exports.delSingleProd = async (req, res, next) => {
+    await Product.findByIdAndDelete(req.params.id)
+    res.redirect("/admin-view_All_products")
+}
+
+
 exports.adminDashboard = (req, res, next) => {
     res.render("admin-dashboard");
 };
@@ -221,7 +227,33 @@ exports.deleteprod = async (req, res, next) => {
     }
 };
 
+exports.adminGetAllOrder = async (req, res, next) => {
+    const order = await Order.find().sort({
+        createdAt: -1
+    })
+    res.render('admin_View_Orders', {
+        order
+    })
+
+}
 // ********************************************************ADMIN AREA CONTROLLER (Ends)*********************
+exports.cancelOrder = async (req, res, next) => {
+    try {
+        await Order.findByIdAndUpdate(req.params.id, {
+            status: "cancel"
+        }, {
+            new: true,
+            runValidators: true
+        })
+        res.redirect("/me");
+
+    } catch (error) {
+        console.log("ERROR" + error);
+    }
+
+
+}
+
 
 exports.login = (req, res, next) => {
     res.render("login");

@@ -31,10 +31,18 @@ router.get('/admin-dashboard', authController.protect, authController.restrictTo
 router.get('/admin-add_products', authController.protect, authController.restrictTo("admin"), viewsController.addNewProduct);
 router.get('/admin-view_All_products', authController.protect, authController.restrictTo("admin"), viewsController.ADMINgetAllProducts);
 router.get('/admin-view_All_Users', authController.protect, authController.restrictTo("admin"), viewsController.ADMINgetAllUsers);
+router.get('/view_allOrders', authController.protect, authController.restrictTo("admin"), viewsController.adminGetAllOrder);
+
+//Update Product(For Admin)
 router.get('/delete-prod/:id', viewsController.deleteprod)
+//delete Produce(For Admin)
+router.get('/deleteproduct/:id', authController.protect, authController.restrictTo("admin"), viewsController.delSingleProd)
+
 
 //User Update USing /me ROUTE
 
 router.get('/update-user-data', authController.protect, viewsController.updateUserData)
+router.get('/cancelOrder/:id', authController.protect, viewsController.cancelOrder);
+
 
 module.exports = router;

@@ -600,6 +600,40 @@
                         <hr>
                     </div> <br>
                     <%}%>
+
+
+
+                    <%if(order.status==="cancel"){%>
+                    <div class="progressbar">
+                        <p><span></span><span style="color: green; font-weight: bold;">Amount Will be Refunded to your
+                                Bank Account
+                                Within 3-4 Working
+                                Days</span></p>
+                        <hr>
+                        <span
+                            style="display: flex;justify-content: space-between; align-items: center;border-radius: 3rem;">
+                            <span
+                                style="width: 30% ;border-radius:1rem 1rem 1rem 1rem;color: white; background-color: red;display:flex; text-align: center; align-items: center;font-weight: bold;"
+                                class="orderPlaced">
+                                &nbsp;&nbsp;Order
+                                Canceled &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i style="font-size: 2rem; color: white;"
+                                    class="fa fa-check-circle" aria-hidden="true"></i> </span><br>
+
+                            <!-- <span
+                                style="width: 33.33%;display: flex;justify-content: space-between;background-color: greenyellow;align-items: center;"
+                                class="orderDispatch">&nbsp;&nbsp;&nbsp;Order
+                                Dispatched<i style="font-size: 2rem; color: black;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span
+                                style="width: 33.33%;display: flex;justify-content: space-between;background-color: #f0f0f0; align-items: center;border-radius: 0rem 1rem 1rem 0rem;"
+                                class="Delivered">&nbsp;&nbsp;&nbsp;Order Delivered<i
+                                    style="font-size: 2rem;color: #f0f0f0;" class="fa fa-check-circle"
+                                    aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;</span></span> -->
+                            <hr>
+                    </div> <br>
+
+                    <%}%>
+    
                     <!-- //Progress Bar Ends ****************************************** -->
 
 
@@ -692,15 +726,17 @@
                         </ul>
                     </div>
                     <%if(order.status==="orderPlaced"){%>
-                    <button
+                    <a href="/cancelOrder/<%=order.id%>"
+                        onclick="return confirm('Are You Sure You Want To cancel this Order');"
                         style="border-radius: 2rem;padding: .5rem;background-color: #f0f0f0; border :1px outset black"
-                        class="cancleOrder">Cancel Order</button>
+                        class="cancleOrder">Cancel Order</a>
                     <%}%>
                 </form>
-
+                
             </div>
             <br>
-            <%})%>
+          
+    <%})%>
 
 
                     <!-- 

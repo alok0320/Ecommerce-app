@@ -37,9 +37,7 @@ const productSchema = new mongoose.Schema({
   productWeight: {
     type: Number
   },
-  deliveryCharge: {
-    type: Number
-  },
+
   productDescription: {
     type: String
   },
@@ -49,16 +47,23 @@ const productSchema = new mongoose.Schema({
   enableDisplay: {
     type: String
   },
-  photo1: {
+  photo: {
     type: String,
-    // required: true,
+    required: true,
   },
-  photo2: {
+  paymentRefund: {
     type: String,
-    // required: true,
+    default: "pending"
   },
+  // photo2: {
+
+  //   data: Buffer,
+  //   contentType: String
+
+  // },
   dealOfDay: {
-    type: String
+    type: String,
+    default: "No"
   },
   tag1: {
     type: String

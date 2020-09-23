@@ -75,7 +75,7 @@
                     <li><a href="/admin-view_All_products"> <i class="icon-interface-windows"></i>View All Product</a>
                     </li>
                     <li><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
-                    <li><a href="/admin-view_All_Users"> <i class="fas fa-user"></i>View All User</a></li>
+                    <li><a href="/admin-view_All_Users"> 👥 View All User</a></li>
                     <li><a href="/me"> <i class="icon-padnote"></i>My Account </a></li>
                 </ul>
                 <!-- <ul class="list-unstyled">
@@ -92,60 +92,81 @@
                         <h2 class="no-margin-bottom">Dashboard</h2>
                     </div>
                 </header><br>
-                <form style="margin-left: 2rem;" action="" method="post">
-                    <label for="Category">Create New Category</label><br>
-                    <input style="padding: .7rem;border-radius: 1rem; border: 1px solid grey;" type="text">
-                    <button
-                        style="padding: .85rem; color: white;background-color: #194342;border: thin; border-radius: 1rem;"
+                <!-- <form style="margin-left: 2rem;" action="/createCategory" method="post">
+                    <label for="Category">Create New Category/SubCategory</label><br>
+                    <input name="categoryName" style="padding: .7rem;border-radius: 1rem; border: 1px solid grey;"
+                        type="text" placeholder="Category Name" required>
+                    <input name="subCategory" style="padding: .7rem;border-radius: 1rem; border: 1px solid grey;"
+                        type="text" placeholder="Sub Category">
+                    <input name="off" style="padding: .7rem;border-radius: 1rem; border: 1px solid grey;" type="text"
+                        placeholder="Off Available in this Category (in %)">
+                    <br><input type="hidden"><br><button type="submit"
+                        style="padding: .85rem; color: white;text-decoration: none; background-color: #194342;border: thin; border-radius: 1rem;"
                         type="submit">Create </button>
-                </form>
+                </form> -->
                 <div
                     style="display:flex;width:100%; align-content: center;margin-left: 10rem; margin-top: 3rem;margin-bottom: 4rem;">
                     <form class="add_new_product">
-                        <p class="hidden" id="SuccessAddproduct" style="border:.1rem solid red; width: 80%;"></p>
                         <fieldset>
                             <legend>Add New Product</legend>
                             <br><br>
                             <div class="form-group">
-                                <label for="productName">Product Title</label>
+                                <label for="productName">Product Title</label><span
+                                    style="color: red;size: 1rem;">*</span>
                                 <input type="text" class="form-control" id="productname" aria-describedby="product"
-                                    placeholder="Enter Product Title" required minlength="5">
+                                    placeholder="Enter Product Title" required minlength="5" autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="productCategory">Product Category</label>
-                                <input type="text" class="form-control" id="productcategory"
-                                    aria-describedby="emailHelp" placeholder="Enter Product Category" required>
+                                <label for="productCategory">Product Category</label><span
+                                    style="color: red;size: 1rem;">*</span>
+                                <!-- <input type="text" id="productcategory"> -->
+                                <select class="form-control" id="productcategory" placeholder="Enter Product Category"
+                                    required>
+                                    <option disabled selected value="Select Category">Select Category</option>
+                                    <%category.forEach (function(category){%>
+                                    <option style="color: brown;"><%=category.category%></option>
+                                    <%})%>
+
+                                </select>
+
                             </div>
                             <div class="form-group">
-                                <label for="productSubCategory">Product SUBCATEGORY(optional)</label>
+                                <label for="productSubCategory">Product SUBCATEGORY(optional)</label><span
+                                    style="color: red;size: 1rem;">*</span>
                                 <input type="text" class="form-control" id="productSubCategory"
-                                    aria-describedby="emailHelp" placeholder="Enter Product's SubCategory" required>
+                                    aria-describedby="emailHelp" placeholder="Enter Product's SubCategory" required
+                                    autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="productQuantity">Selling Price</label>
+                                <label for="productQuantity">Selling Price</label><span
+                                    style="color: red;size: 1rem;">*</span>
                                 <input type="tel" class="form-control" id="productSellPrice"
-                                    aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required>
+                                    aria-describedby="emailHelp" placeholder="Selling Price" required
+                                    autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="productQuantity">Max Price</label>
+                                <label for="productQuantity">Max Price</label><span
+                                    style="color: red;size: 1rem;">*</span>
                                 <input type="tel" class="form-control" id="productMaxPrice" aria-describedby="emailHelp"
-                                    placeholder="AVAILABLE QUANTITY" required>
+                                    placeholder="Maximum Price" required autocomplete="off">
                             </div>
                             <div class="form-group">
-                                <label for="productQuantity">AVAILABLE QUANTITY</label>
+                                <label for="productQuantity">AVAILABLE QUANTITY</label><span
+                                    style="color: red;size: 1rem;">*</span>
                                 <input type="tel" class="form-control" id="productAvailableQty"
-                                    aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required>
+                                    aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required
+                                    autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="productweight">PRODUCT WEIGHT</label>
                                 <input type="tel" class="form-control" id="productweight" aria-describedby="emailHelp"
-                                    placeholder="PRODUCT WEIGHT" required>
+                                    placeholder="PRODUCT WEIGHT" autocomplete="off">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="productQuantity">Delivery Charge</label>
-                                <input type="tel" class="form-control" id="deliverycharge" value="₹"
+                                <input type="tel" class="form-control" id="deliverycharge" value=""
                                     aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="productDescription">PRODUCT DESCRIPTION</label>
                                 <textarea type="textarea" class="form-control" id="productDescription"
@@ -153,26 +174,30 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleSelect1">Approved By</label>
-                                <select class="form-control" id="approvedBy">
-                                    <option>Choose</option>
+                                <label for="exampleSelect1">Added By</label><span
+                                    style="color: red;size: 1rem;">*</span>
+                                <select class="form-control" id="approvedBy" required>
+                                    <option disabled selected>Choose</option>
                                     <option>Alok Puri</option>
                                     <option>Shashwat Pratap Singh</option>
 
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelect1">Enable Display</label>
-                                <select class="form-control" id="enableDisplay">
-                                    <option>Choose</option>
+                                <label for="exampleSelect1">Enable Display</label><span
+                                    style="color: red;size: 1rem;">*</span>
+                                <select class="form-control" id="enableDisplay" required>
+                                    <option disabled selected>Choose</option>
                                     <option>Yes</option>
                                     <option>No</option>
 
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleSelect1">Deal Of Day</label>
-                                <select class="form-control" id="dealOfDay">
+                                <label for="exampleSelect1">Deal Of Day</label><span
+                                    style="color: red;size: 1rem;">*</span>
+                                <select class="form-control" id="dealOfDay" required>
+                                    <option disabled selected>Choose</option>
                                     <option>Yes</option>
                                     <option>No</option>
 
@@ -180,41 +205,42 @@
                             </div>
 
                             <br>
-                            <h4>Tags</h4>
+                            <h4>Tags</h4><small>(Optional)</small>
                             <div class="form-group">
                                 <label for="exampleSelect1">Tag 1</label><br>
-                                <input type="text" id="tag1">
+                                <input type="text" id="tag1" autocomplete="off">
 
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelect1">Tag 2</label><br>
-                                <input type="text" id="tag2">
+                                <input type="text" id="tag2" autocomplete="off">
 
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelect1">Tag 3</label><br>
-                                <input type="text" id="tag3">
+                                <input type="text" id="tag3" autocomplete="off">
 
                             </div>
                             <div class="form-group">
                                 <label for="exampleSelect1">Tag 4</label><br>
-                                <input type="text" id="tag4">
+                                <input type="text" id="tag4" autocomplete="off">
 
                             </div>
 
 
                             <div class="wrap-file" style="display: flex;">
                                 <div class="form-group">
-                                    <label for="exampleInputFile">Product Image(Thumbnail)</label>
-                                    <input type="file" class="form-control-file" id="exampleInputFile"
-                                        aria-describedby="fileHelp">
-                                    <small id="fileHelp" class="form-text text-muted"></small>
+                                    <label for="exampleInputFile">Product Image</label><span
+                                        style="color: red;size: 1rem;">*</span>
+                                    <input type="file" accept="image/*" name="photo" class="form-control-file"
+                                        id="photo" required aria-describedby="fileHelp">
+                                    <small id="fileHelp" class="form-text text-muted">This is an display Image</small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile">Product Image(Big)</label>
-                                    <input type="file" name="photo" class="form-control-file" id="photo"
+                                    <label for="exampleInputFile">Please provide Image less than 1 Mb</label>
+                                    <!-- <input type="file" name="photo" class="form-control-file" id="photo"
                                         aria-describedby="fileHelp">
-                                    <small id="fileHelp" class="form-text text-muted">For Product Detail Page.</small>
+                                    <small id="fileHelp" class="form-text text-muted">For Product Detail Page.</small> -->
                                 </div>
                             </div>
                             <div class="form-group">
@@ -223,6 +249,8 @@
                                     Product</button>
                                 </select>
                             </div>
+                            <p class="hidden" id="SuccessAddproduct" style="border:.1rem solid red; width: 80%;"></p>
+
                     </form>
                 </div> <!-- Page Footer-->
                 <footer class="main-footer">

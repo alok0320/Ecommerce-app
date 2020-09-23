@@ -26942,8 +26942,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+// export const addproduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, photo) => {
+// With Photo
 var addproduct = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(form) {
     var res;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
@@ -26954,20 +26956,23 @@ var addproduct = /*#__PURE__*/function () {
             return (0, _axios.default)({
               method: "POST",
               url: "http://localhost:5000/alok/api/v1/products",
-              data: {
-                name: name,
-                price: price,
-                maxprice: maxprice,
-                category: category,
-                subcategory: subcategory,
-                availableQty: availableQty,
-                productWeight: productWeight,
-                deliveryCharge: deliveryCharge,
-                productDescription: productDescription,
-                approvedBy: approvedBy,
-                enableDisplay: enableDisplay,
-                photo: photo
-              }
+              data: form // headers: {
+              //     Authorization: `Bearer ${req.cookies.jwt}`,
+              // },
+              // data: {
+              //     name,
+              //     price,
+              //     maxprice,
+              //     category,
+              //     subcategory,
+              //     availableQty,
+              //     productWeight,
+              //     productDescription,
+              //     approvedBy,
+              //     enableDisplay,
+              //     photo
+              // },
+
             });
 
           case 3:
@@ -27005,7 +27010,7 @@ var addproduct = /*#__PURE__*/function () {
     }, _callee, null, [[0, 9]]);
   }));
 
-  return function addproduct(_x, _x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12) {
+  return function addproduct(_x) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -27013,7 +27018,7 @@ var addproduct = /*#__PURE__*/function () {
 exports.addproduct = addproduct;
 
 var editProduct = /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4) {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4) {
     var url, obj, id, res;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -27035,7 +27040,6 @@ var editProduct = /*#__PURE__*/function () {
                 subcategory: subcategory,
                 availableQty: availableQty,
                 productWeight: productWeight,
-                deliveryCharge: deliveryCharge,
                 productDescription: productDescription,
                 approvedBy: approvedBy,
                 enableDisplay: enableDisplay,
@@ -27081,7 +27085,7 @@ var editProduct = /*#__PURE__*/function () {
     }, _callee2, null, [[0, 10]]);
   }));
 
-  return function editProduct(_x13, _x14, _x15, _x16, _x17, _x18, _x19, _x20, _x21, _x22, _x23, _x24, _x25, _x26, _x27, _x28) {
+  return function editProduct(_x2, _x3, _x4, _x5, _x6, _x7, _x8, _x9, _x10, _x11, _x12, _x13, _x14, _x15, _x16) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -27234,20 +27238,36 @@ if (userpasswordForm) {
 if (addnewproduct) {
   addnewproduct.addEventListener("submit", function (e) {
     e.preventDefault();
-    document.querySelector(".submitProduct").innerHTML = "Adding Product....";
-    var name = document.getElementById("productname").value;
-    var price = document.getElementById("productSellPrice").value;
-    var maxprice = document.getElementById("productMaxPrice").value;
-    var category = document.getElementById("productcategory").value;
-    var subcategory = document.getElementById("productSubCategory").value;
-    var availableQty = document.getElementById("productAvailableQty").value;
-    var productWeight = document.getElementById("productweight").value;
-    var deliveryCharge = document.getElementById("deliverycharge").value;
-    var productDescription = document.getElementById("productDescription").value;
-    var approvedBy = document.getElementById("approvedBy").value;
-    var enableDisplay = document.getElementById("enableDisplay").value;
-    var photo = document.getElementById("photo").value;
-    (0, _adminProductOperation.addproduct)(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo);
+    document.querySelector(".submitProduct").innerHTML = "Adding Product...."; //With photo
+
+    var form = new FormData();
+    form.append("name", document.getElementById("productname").value);
+    form.append("price", document.getElementById("productSellPrice").value);
+    form.append("maxprice", document.getElementById("productMaxPrice").value);
+    form.append("category", document.getElementById("productcategory").value);
+    form.append("subcategory", document.getElementById("productSubCategory").value);
+    form.append("availableQty", document.getElementById("productAvailableQty").value);
+    form.append("productWeight", document.getElementById("productweight").value);
+    form.append("productDescription", document.getElementById("productDescription").value);
+    form.append("approvedBy", document.getElementById("approvedBy").value);
+    form.append("enableDisplay", document.getElementById("enableDisplay").value);
+    form.append("photo", document.getElementById("photo").files[0]); //************* Without Photo ****************/
+    // const name = document.getElementById("productname").value;
+    // const price = document.getElementById("productSellPrice").value;
+    // const maxprice = document.getElementById("productMaxPrice").value;
+    // const category = document.getElementById("productcategory").value;
+    // const subcategory = document.getElementById("productSubCategory").value;
+    // const availableQty = document.getElementById("productAvailableQty").value;
+    // const productWeight = document.getElementById("productweight").value;
+    // const productDescription = document.getElementById("productDescription").value;
+    // const approvedBy = document.getElementById("approvedBy").value;
+    // const enableDisplay = document.getElementById("enableDisplay").value;
+    // const photo = document.getElementById("photo").files[0];
+    // alert(form);
+    // console.log(form);
+
+    (0, _adminProductOperation.addproduct)(form); // addproduct(name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, photo)
+
     document.querySelector(".submitProduct").innerHTML = "Add Product";
   });
 }
@@ -27262,7 +27282,6 @@ if (updateProduct) {
     var subcategory = document.getElementById("productSubCategory").value;
     var availableQty = document.getElementById("productAvailableQty").value;
     var productWeight = document.getElementById("productweight").value;
-    var deliveryCharge = document.getElementById("deliverycharge").value;
     var productDescription = document.getElementById("productDescription").value;
     var approvedBy = document.getElementById("approvedBy").value;
     var enableDisplay = document.getElementById("enableDisplay").value;
@@ -27271,7 +27290,7 @@ if (updateProduct) {
     var tag2 = document.getElementById("tag2").value;
     var tag3 = document.getElementById("tag3").value;
     var tag4 = document.getElementById("tag4").value;
-    (0, _adminProductOperation.editProduct)(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4);
+    (0, _adminProductOperation.editProduct)(name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4);
   });
 }
 },{"./login":"login.js","./updateSettings":"updateSettings.js","./adminProductOperation":"adminProductOperation.js"}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -27302,7 +27321,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37563" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43583" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

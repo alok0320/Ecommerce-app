@@ -5,10 +5,13 @@ const authController = require("./../controllers/authController");
 const router = new express.Router();
 // router.param('id', productController.checkId);
 
+
+
+
 router
   .route("/")
   .get(authController.protect, authController.restrictTo("admin"), productController.getAllProducts)
-  .post(productController.addNewProduct);
+  .post(authController.protect, productController.uploadProductPhoto, productController.resizeProductImage, productController.addNewProduct);
 
 router
   .route("/:id")

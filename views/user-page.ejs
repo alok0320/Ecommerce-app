@@ -184,7 +184,16 @@
             display: block;
         }
 
+        @media only screen and (min-width: 720px) {
+            .jhs {
+                width: 30%;
+            }
+        }
+
         @media only screen and (max-width: 720px) {
+            .jhs {
+                width: 50%;
+            }
 
             .dropdown {
                 display: none;
@@ -322,7 +331,8 @@
                         <a href="/me"><i class="material-icons">account_circle</i> My Profile</a>
                         <a href="/me"><i class="material-icons">local_mall</i> My Orders</a>
                         <a href="/"><i class="material-icons">local_mall</i> Start Shopping</a>
-                        <a href="#"><i class="material-icons">phone_in_talk</i> 24x7 Customer Care</a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=customerService@indicraft.com"
+                            target="_blank"><i class="material-icons">phone_in_talk</i> 24x7 Customer Care</a>
                         <a href="#"><i class="material-icons">storefront</i> Sell on IndiCraft</a>
                         <!-- <button type="submit" class="logout"
                             style="margin-left: .6rem; padding-top: 1rem; padding-bottom: 1rem; background: none; border: none;"><i><img
@@ -604,16 +614,16 @@
 
 
                     <%if(order.status==="cancel"){%>
-                    <div class="progressbar">
+                    <div class="progressbar ">
                         <p><span></span><span style="color: green; font-weight: bold;">Amount Will be Refunded to your
                                 Bank Account
                                 Within 3-4 Working
                                 Days</span></p>
                         <hr>
                         <span
-                            style="display: flex;justify-content: space-between; align-items: center;border-radius: 3rem;">
-                            <span
-                                style="width: 30% ;border-radius:1rem 1rem 1rem 1rem;color: white; background-color: red;display:flex; text-align: center; align-items: center;font-weight: bold;"
+                            style="display: flex;justify-content: space-between;text-align: left !important; align-items: center;border-radius: 3rem;">
+                            <span class="jhs"
+                                style=" border-radius:1rem 1rem 1rem 1rem;color: white; background-color: red;display:flex; text-align: center; align-items: center;font-weight: bold;"
                                 class="orderPlaced">
                                 &nbsp;&nbsp;Order
                                 Canceled &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i style="font-size: 2rem; color: white;"
@@ -728,7 +738,7 @@
                     <%if(order.status==="orderPlaced"){%>
                     <a href="/cancelOrder/<%=order.id%>"
                         onclick="return confirm('Are You Sure You Want To cancel this Order');"
-                        style="border-radius: 2rem;padding: .5rem;background-color: #f0f0f0; border :1px outset black"
+                        style="border-radius: 2rem; text-decoration: none; color: #16016b;font-weight: bolder; padding: .5rem;background-color: #f0f0f0; border :1px outset black"
                         class="cancleOrder">Cancel Order</a>
                     <%}%>
                 </form>

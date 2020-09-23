@@ -148,22 +148,40 @@ if (addnewproduct) {
     addnewproduct.addEventListener("submit", e => {
         e.preventDefault();
         document.querySelector(".submitProduct").innerHTML = "Adding Product...."
+        //With photo
+        const form = new FormData()
+        form.append("name", document.getElementById("productname").value)
+        form.append("price", document.getElementById("productSellPrice").value)
+        form.append("maxprice", document.getElementById("productMaxPrice").value)
+        form.append("category", document.getElementById("productcategory").value)
+        form.append("subcategory", document.getElementById("productSubCategory").value)
+        form.append("availableQty", document.getElementById("productAvailableQty").value)
+        form.append("productWeight", document.getElementById("productweight").value)
+        form.append("productDescription", document.getElementById("productDescription").value)
+        form.append("approvedBy", document.getElementById("approvedBy").value)
+        form.append("enableDisplay", document.getElementById("enableDisplay").value)
+        form.append("photo", document.getElementById("photo").files[0])
 
-        const name = document.getElementById("productname").value;
-        const price = document.getElementById("productSellPrice").value;
-        const maxprice = document.getElementById("productMaxPrice").value;
-        const category = document.getElementById("productcategory").value;
-        const subcategory = document.getElementById("productSubCategory").value;
-        const availableQty = document.getElementById("productAvailableQty").value;
-        const productWeight = document.getElementById("productweight").value;
-        const deliveryCharge = document.getElementById("deliverycharge").value;
-        const productDescription = document.getElementById("productDescription").value;
-        const approvedBy = document.getElementById("approvedBy").value;
-        const enableDisplay = document.getElementById("enableDisplay").value;
-        const photo = document.getElementById("photo").value;
 
+        //************* Without Photo ****************/
 
-        addproduct(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo)
+        // const name = document.getElementById("productname").value;
+        // const price = document.getElementById("productSellPrice").value;
+        // const maxprice = document.getElementById("productMaxPrice").value;
+        // const category = document.getElementById("productcategory").value;
+        // const subcategory = document.getElementById("productSubCategory").value;
+        // const availableQty = document.getElementById("productAvailableQty").value;
+        // const productWeight = document.getElementById("productweight").value;
+        // const productDescription = document.getElementById("productDescription").value;
+        // const approvedBy = document.getElementById("approvedBy").value;
+        // const enableDisplay = document.getElementById("enableDisplay").value;
+        // const photo = document.getElementById("photo").files[0];
+
+        // alert(form);
+        // console.log(form);
+        addproduct(form)
+
+        // addproduct(name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, photo)
         document.querySelector(".submitProduct").innerHTML = "Add Product"
 
 
@@ -193,7 +211,6 @@ if (updateProduct) {
         const subcategory = document.getElementById("productSubCategory").value;
         const availableQty = document.getElementById("productAvailableQty").value;
         const productWeight = document.getElementById("productweight").value;
-        const deliveryCharge = document.getElementById("deliverycharge").value;
         const productDescription = document.getElementById("productDescription").value;
         const approvedBy = document.getElementById("approvedBy").value;
         const enableDisplay = document.getElementById("enableDisplay").value;
@@ -205,7 +222,7 @@ if (updateProduct) {
 
 
 
-        editProduct(name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4);
+        editProduct(name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4);
     })
 
 

@@ -5,20 +5,42 @@ const {
     createTestAccount
 } = require("nodemailer");
 const User = require("../models/userModel");
+const Category = require("../models/category");
+
 const axios = require("axios");
 const Order = require("../models/order");
 
 
 exports.getProducts = async (req, res, next) => {
     try {
+        const category = await Category.find();
         const products = await Product.find();
+        const bestoffer = await Product.find({
+            ta: maxprice - price
+        })
+        const dealofday = await Product.find({
+            dealOfDay: "Yes"
+        });
         res.render("mainPage", {
             products,
+            category,
+            dealofday,
+            bestoffer
+
+
         });
     } catch (err) {
         console.log(err);
     }
 };
+
+exports.productPage = async (req, res, next) => {
+    const result = await Product.find(req.query)
+    res.render('productPage', {
+        result,
+        category: req.query.category
+    })
+}
 
 exports.addToCart = (req, res, next) => {
     const productId = req.params.id;
@@ -26,6 +48,8 @@ exports.addToCart = (req, res, next) => {
 
     Product.findById(productId, (err, product) => {
         cart.add(product, product._id);
+
+        // cart.add(product, product._id);
         req.session.cart = cart;
         console.log(req.session.cart);
         res.redirect("/shopping-cart");
@@ -33,6 +57,21 @@ exports.addToCart = (req, res, next) => {
 
     // ******************  Apply Better error handling**********/
 };
+
+exports.createCategory = async (req, res, next) => {
+    try {
+        await Category.create({
+            category: req.body.categoryName,
+            subCategory: req.body.subCategory,
+            off: req.body.off
+
+        });
+        res.redirect("/admin-add_products")
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 exports.shoppingCart = (req, res, next) => {
     if (!req.session.cart) {
@@ -168,8 +207,15 @@ exports.adminDashboard = (req, res, next) => {
     res.render("admin-dashboard");
 };
 
-exports.addNewProduct = (req, res, next) => {
-    res.render("add-new-product");
+exports.addNewProduct = async (req, res, next) => {
+
+    const category = await Category.find();
+
+    res.render("add-new-product", {
+        category
+    });
+
+
 };
 
 exports.ADMINgetAllProducts = async (req, res, next) => {
@@ -235,6 +281,15 @@ exports.adminGetAllOrder = async (req, res, next) => {
         order
     })
 
+}
+
+exports.admin_HistoryAll_Orders = async (req, res, next) => {
+    const order = await Order.find().sort({
+        createdAt: -1
+    })
+    res.render('allOrderHistory', {
+        order
+    })
 }
 // ********************************************************ADMIN AREA CONTROLLER (Ends)*********************
 exports.cancelOrder = async (req, res, next) => {

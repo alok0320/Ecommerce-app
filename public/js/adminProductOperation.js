@@ -1,26 +1,34 @@
 import '@babel/polyfill';
 import axios from 'axios';
 
-export const addproduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, photo) => {
+// export const addproduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, photo) => {
+
+
+// With Photo
+export const addproduct = async (form) => {
+
     // var ws = new WebSocket("ws://localhost:3000/alok/api/v1/login");
     try {
         const res = await axios({
             method: "POST",
             url: "http://localhost:5000/alok/api/v1/products",
-            data: {
-                name,
-                price,
-                maxprice,
-                category,
-                subcategory,
-                availableQty,
-                productWeight,
-                deliveryCharge,
-                productDescription,
-                approvedBy,
-                enableDisplay,
-                photo
-            },
+            data: form
+            // headers: {
+            //     Authorization: `Bearer ${req.cookies.jwt}`,
+            // },
+            // data: {
+            //     name,
+            //     price,
+            //     maxprice,
+            //     category,
+            //     subcategory,
+            //     availableQty,
+            //     productWeight,
+            //     productDescription,
+            //     approvedBy,
+            //     enableDisplay,
+            //     photo
+            // },
 
         });
         console.log(res.data.status);
@@ -49,7 +57,7 @@ export const addproduct = async (name, price, maxprice, category, subcategory, a
 
 };
 
-export const editProduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, deliveryCharge, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4, ) => {
+export const editProduct = async (name, price, maxprice, category, subcategory, availableQty, productWeight, productDescription, approvedBy, enableDisplay, dealOfDay, tag1, tag2, tag3, tag4, ) => {
     try {
         const url = (window.location.href).toLowerCase()
         const obj = new URL(url);
@@ -66,7 +74,7 @@ export const editProduct = async (name, price, maxprice, category, subcategory, 
                 subcategory,
                 availableQty,
                 productWeight,
-                deliveryCharge,
+
                 productDescription,
                 approvedBy,
                 enableDisplay,

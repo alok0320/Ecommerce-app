@@ -74,7 +74,7 @@
                     <li><a href="/admin-add_products"> <i class="icon-grid"></i>Add New Product </a></li>
                     <li class="active"><a href=""> <i class="icon-interface-windows"></i>View All Product</a></li>
                     <li><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
-                    <li><a href="/admin-view_All_Users"> <i class="fas fa-user"></i>View All User</a></li>
+                    <li><a href="/admin-view_All_Users"> 👥 View All User</a></li>
                     <li><a href="/me"> <i class="icon-padnote"></i>My Account </a></li>
                 </ul>
 
@@ -95,7 +95,7 @@
                             <th scope="col">Product Price</th>
                             <th scope="col">Available Qty</th>
                             <th scope="col">Added By </th>
-                            <th scope="col">Enable Display </th>
+                            <!-- <th scope="col">Enable Display </th> -->
                             <th scope="col">Edit </th>
                             <th scope="col">Delete </th>
 
@@ -109,9 +109,18 @@
                         <tr style="color: black;font-family: 'Crimson Text', serif;font-size: 1rem;">
                             <!-- <th scope="row">i</th> -->
                             <!-- <td></td> -->
-                            <td><img style="height: 6rem !important;" src="img/22.jpg" alt=""></td>
+
+                            <td><img style="height: 5.8rem !important;width: 5rem"
+                                    src="./img/productImage/<%=products.photo%>" alt="">
+                            </td>
+
+
+                            <!-- <td><img style="height: 6rem !important;" src="./img/categoryImg/khadiForMen.jpeg" alt="">
+                            </td> -->
                             <td><%=products._id%></td>
-                            <td style="font-weight: bold;"><%=products.name%></td>
+                            <td>
+                                <p style="font-weight: bold;max-width: 19rem;"><%=products.name%></p>
+                            </td>
                             <td>₹<%=products.price%></td>
                             <%if(products.availableQty>=5){%>
                             <td style="color: green;"><span style="font-weight: bold;"><%=products.availableQty %>
@@ -121,7 +130,7 @@
                             <td style="color:  red;font-weight: bold;"><%=products.availableQty%> Unit</td>
                             <%}%>
                             <td><%=products.approvedBy%></td>
-                            <td>
+                            <!-- <td>
                                 <form action="">
                                     <select name="enableDisplay" id="enableDisplay">
                                         <option value="<%=products.enableDisplay%>">
@@ -129,7 +138,7 @@
                                         <option value="">NO</option>
                                     </select>
                                 </form>
-                            </td>
+                            </td> -->
 
                             <td><a href="/delete-prod/<%=products._id%>"><button onMouseOver="this.style.color='green'"
                                         onMouseOut="this.style.color='black'" class="<products._id>" id=""
@@ -165,12 +174,8 @@
 
     </div>
     </div>
-
-
     <script src="js/bundle.js"></script>
     <script src="jquery.min.js"></script>
-
 </body>
-
 
 </html>

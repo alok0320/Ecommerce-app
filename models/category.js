@@ -2,12 +2,21 @@ const mongoose = require("mongoose");
 
 const categorySchema = new mongoose.Schema({
 
-    categoryName: {
-        type: String
+    category: {
+        type: String,
+        required: true
     },
 
-    subCategoty: {
+    subCategory: {
         type: String
+    },
+    off: {
+        type: String,
+        required: true
+    },
+    photo: {
+        type: String,
+        default: "img/22.jpeg"
     }
 });
 

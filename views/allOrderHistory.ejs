@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Users List | Admin Dashboard | IndiCraft</title>
+    <title>View All Products | Admin Dashboard | IndiCraft</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
@@ -72,18 +72,12 @@
                 <ul class="list-unstyled">
                     <li><a href="/admin-dashboard"> <i class="icon-home"></i>Home </a></li>
                     <li><a href="/admin-add_products"> <i class="icon-grid"></i>Add New Product </a></li>
-                    <li><a href="/admin-view_All_products"> <i class="icon-interface-windows"></i>View All Product</a>
-                    </li>
-                    <li><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
-                    <li class="active"><a href="#"> 👥 View All User</a></li>
+                    <li><a href=""> <i class="icon-interface-windows"></i>View All Product</a></li>
+                    <li class="active"><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
+                    <li><a href="/admin-view_All_Users"> 👥 View All User</a></li>
                     <li><a href="/me"> <i class="icon-padnote"></i>My Account </a></li>
                 </ul>
-                <!-- <ul class="list-unstyled">
-                    <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
-                    <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
-                    <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
-                    <li> <a href="#"> <i class="icon-picture"></i>Demo </a></li>
-                </ul> -->
+
             </nav>
             <div class="content-inner">
                 <!-- Page Header-->
@@ -95,73 +89,96 @@
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col"> User Role</th>
-                            <th scope="col"> Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col"> Phone</th>
-                            <th scope="col">Edit User </th>
-                            <th scope="col">Delete User </th>
+                            <th scope="col">OrderId</th>
+                            <th scope="col">Transaction Id</th>
+                            <th scope="col">User Id</th>
+                            <th scope="col">status</th>
+                            <th scope="col">Address</th>
+
+                            <th scope="col">View/Edit Order</th>
+
+
+
 
 
                         </tr>
                     </thead>
                     <tbody>
-                        <%users.forEach (function(users){%>
-                        <tr style="color: black;font-size: 1rem;">
+                        <%order.forEach (function(order){%>
+
+
+                        <tr style="color: black;font-family: 'Crimson Text', serif;font-size: 1rem;">
                             <!-- <th scope="row">i</th> -->
                             <!-- <td></td> -->
-                            <td><%=users._id%></td>
-                            <%if(users.role ==="admin"){%>
-                            <td style="font-weight: bold; color: chartreuse;font-size: 1rem;">
-                                <%=(users.role).toUpperCase()%></td>
-                            <%}else{%>
-                            <td><%=users.role%></td>
-                            <%}%>
-                            <%if(users.role ==="admin"){%>
-                            <td style="font-weight: bold; color: chartreuse;font-size: 1rem;">
-                                <%=(users.name).toUpperCase()%></td>
-                            <%}else{%>
-                            <td><%=users.name%></td>
-                            <%}%>
-                            <td><%=users.email%></td>
-                            <td><%=users.phone%></td>
-                            <%if(users.role !="admin" ){%>
-                            <td><button
-                                    style="background-color: black;color: white;border: 2px solid;border-radius: .4rem;font-weight: bolder;"
-                                    class="<%=users._id%>" type="submit"><i class="fa fa-edit"></i></button></td>
-                            <td><button
-                                    style="background-color: black;color: white;border: 2px solid;border-radius: .4rem;font-weight: bolder;"
-                                    id="<%=users._id%>" type="submit">X</button>
-                            </td>
-                            <%}%>
-                        </tr>
+                            <td><%=order.id%></td>
 
+                            <td><%=order.paymentId%></td>
+                            <td style="font-weight: bold;"><%=order.user._id%></td>
+
+
+
+                            <%if(order.status==="orderPlaced" ){%>
+
+                            <td style="font-weight: bold;color: green;">
+                                <%=(order.status).toUpperCase()%><i style="font-size: .8rem;color: red;">New</i>
+                            </td>
+
+                            <%}%>
+                            <%if(order.status==="cancel" ){%>
+
+                            <td style="font-weight: bold;color: red;">
+                                <%=(order.status).toUpperCase()%>ED
+                            </td>
+
+                            <%}%>
+                                <%if(order.status==="delivered" ){%>
+
+                            <td style="font-weight: bold;color: blueviolet;">
+                                <%=(order.status).toUpperCase()%><i style="font-size: 1rem; color: blue;"
+                                    class="fa fa-check-circle" aria-hidden="true">
+                            </td>
+
+                            <%}%>
+
+                            <%if(order.status=== "orderDispatched"){%>
+                            <td style="font-weight: bold;color: black;"><%=(order.status).toUpperCase()%></td>
+                            <%}%>
+
+<td style="font-size: .95rem;"><%=order.address.city+ ", "+ order.address.state%></td>
+                            <td><a href="/delete-prod/"><button onMouseOver="this.style.color='green'"
+                                        onMouseOut="this.style.color='black'" class="" id="" type="submit"><i
+                                            class="fa fa-edit"></i></button></a>
+                            </td>
+
+
+                        </tr>
 
                         <%});%>
                     </tbody>
                 </table>
-
-            </div> <!-- Page Footer-->
-            <!-- <footer class="main-footer " style="bottom: 0 !important;">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <p>IndiCraft &copy; 2020</p>
-                        </div>
-                        <div class="col-sm-6 text-right">
-                            <p>Design by <a href="" class="external">ALOK PURI</a></p>
-                        </div>
-        
+                <br><br><br>
+                <div style="color: black;margin-bottom: 0;height: 4rem; border-top: 1px solid;" class="row">
+                    <div style="margin-top: 3rem;" class="col-sm-6">
+                        <p>IndiCraft &copy; 2020</p>
                     </div>
+                    <div style="margin-top: 3rem;" class="col-sm-6 text-right">
+                        <p>Design by <a href="" class="external">ALOK PURI</a></p>
+                    </div>
+
                 </div>
-            </footer> -->
+            </div> <!-- Page Footer-->
+
         </div>
+
+
     </div>
     </div>
+
+
     <script src="js/bundle.js"></script>
     <script src="jquery.min.js"></script>
 
 </body>
+
 
 </html>

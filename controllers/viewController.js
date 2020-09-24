@@ -217,7 +217,7 @@ exports.ADMINgetAllProducts = async (req, res, next) => {
   try {
     const d = await axios({
       method: "GET",
-      url: "http://localhost:5000/alok/api/v1/products",
+      url: "/alok/api/v1/products",
       headers: {
         Authorization: `Bearer ${req.cookies.jwt}`,
       },
@@ -235,7 +235,7 @@ exports.ADMINgetAllUsers = async (req, res, next) => {
   try {
     const d = await axios({
       method: "GET",
-      url: "http://localhost:5000/alok/api/v1/users",
+      url: "/alok/api/v1/users",
       headers: {
         Authorization: `Bearer ${req.cookies.jwt}`,
       },
@@ -257,7 +257,7 @@ exports.deleteprod = async (req, res, next) => {
 
     const result = await axios({
       method: "GET",
-      url: `http://localhost:5000/alok/api/v1/products/${ID}`,
+      url: `/alok/api/v1/products/${ID}`,
     });
     console.log("rsssssssssssssssssssssssssssssssssse:::" + result.data);
     res.render("admin_Update_Product", {

@@ -36,7 +36,7 @@
 
          const res = await axios({
              method: "POST",
-             url: "http://localhost:5000/alok/api/v1/users/signup",
+             url: "/alok/api/v1/users/signup",
              data: {
                  name,
                  email,
@@ -73,7 +73,7 @@
      try {
          const res = await axios({
              method: 'GET',
-             url: 'http://localhost:5000/alok/api/v1/users/logout'
+             url: '/alok/api/v1/users/logout'
          })
 
          if (res.data.status === 'success') {

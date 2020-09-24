@@ -12,7 +12,7 @@ const DB = process.env.DATABASE_DEV
 // );
 
 mongoose
-  .connect(DB, {
+  .connect(`${DB}`, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,

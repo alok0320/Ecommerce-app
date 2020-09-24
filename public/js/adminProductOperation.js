@@ -11,7 +11,7 @@ export const addproduct = async (form) => {
     try {
         const res = await axios({
             method: "POST",
-            url: "http://localhost:5000/alok/api/v1/products",
+            url: "/alok/api/v1/products",
             data: form
             // headers: {
             //     Authorization: `Bearer ${req.cookies.jwt}`,
@@ -65,7 +65,7 @@ export const editProduct = async (name, price, maxprice, category, subcategory, 
 
         const res = await axios({
             method: "PATCH",
-            url: `http://localhost:5000/alok/api/v1/products/${id}`,
+            url: `/alok/api/v1/products/${id}`,
             data: {
                 name,
                 price,

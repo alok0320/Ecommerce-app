@@ -2,7 +2,7 @@
 const Product = require("./../models/productModel");
 const Cart = require("./../models/cart");
 const {
-    createTestAccount
+  createTestAccount
 } = require("nodemailer");
 const User = require("../models/userModel");
 const Category = require("../models/category");
@@ -10,325 +10,317 @@ const Category = require("../models/category");
 const axios = require("axios");
 const Order = require("../models/order");
 
-
 exports.getProducts = async (req, res, next) => {
-    try {
-        const category = await Category.find();
-        const products = await Product.find();
-        const bestoffer = await Product.find({
-            ta: maxprice - price
-        })
-        const dealofday = await Product.find({
-            dealOfDay: "Yes"
-        });
-        res.render("mainPage", {
-            products,
-            category,
-            dealofday,
-            bestoffer
+  try {
+    const newArrivals = await Product.find().sort({
+      createdAt: 1
+    }).limit(8)
+    const category = await Category.find();
+    const products = await Product.find();
+    const homedecore = await Product.find({
+      category: "home decore"
+    }).limit(6);
 
-
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    const bestoffer = await Product.find({
+      tag1: "offer",
+    });
+    const dealofday = await Product.find({
+      dealOfDay: "Yes",
+    });
+    res.render("mainPage", {
+      products,
+      category,
+      dealofday,
+      bestoffer,
+      homedecore,
+      newArrivals
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 exports.productPage = async (req, res, next) => {
-    const result = await Product.find(req.query)
-    res.render('productPage', {
-        result,
-        category: req.query.category
-    })
-}
+  const result = await Product.find(req.query);
+  res.render("productPage", {
+    result,
+    category: req.query.category,
+  });
+};
 
 exports.addToCart = (req, res, next) => {
-    const productId = req.params.id;
-    const cart = new Cart(req.session.cart ? req.session.cart : {});
+  const productId = req.params.id;
+  const cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    Product.findById(productId, (err, product) => {
-        cart.add(product, product._id);
+  Product.findById(productId, (err, product) => {
+    cart.add(product, product._id);
 
-        // cart.add(product, product._id);
-        req.session.cart = cart;
-        console.log(req.session.cart);
-        res.redirect("/shopping-cart");
-    });
+    // cart.add(product, product._id);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect("/shopping-cart");
+  });
 
-    // ******************  Apply Better error handling**********/
+  // ******************  Apply Better error handling**********/
 };
 
 exports.createCategory = async (req, res, next) => {
-    try {
-        await Category.create({
-            category: req.body.categoryName,
-            subCategory: req.body.subCategory,
-            off: req.body.off
-
-        });
-        res.redirect("/admin-add_products")
-    } catch (error) {
-        console.log(error);
-    }
-
-}
+  try {
+    await Category.create({
+      category: req.body.categoryName,
+      subCategory: req.body.subCategory,
+      off: req.body.off,
+    });
+    res.redirect("/admin-add_products");
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 exports.shoppingCart = (req, res, next) => {
-    if (!req.session.cart) {
-        return res.render("cart-view", {
-            products: null,
-        });
-    }
-
-    const cart = new Cart(req.session.cart);
-    res.render("cart-view", {
-        products: cart.generateArray(),
-        totalPrice: cart.totalPrice,
-        finalprice: cart.finalprice,
-        discount: cart.discount,
-        delivery: cart.delivery
+  if (!req.session.cart) {
+    return res.render("cart-view", {
+      products: null,
     });
+  }
+
+  const cart = new Cart(req.session.cart);
+  res.render("cart-view", {
+    products: cart.generateArray(),
+    totalPrice: cart.totalPrice,
+    finalprice: cart.finalprice,
+    discount: cart.discount,
+    delivery: cart.delivery,
+  });
 };
 
 exports.reduceCartByOne = (req, res, next) => {
-    const productId = req.params.id;
-    const cart = new Cart(req.session.cart ? req.session.cart : {});
-    cart.reduceByOne(productId);
-    req.session.cart = cart;
-    res.redirect("/shopping-cart");
+  const productId = req.params.id;
+  const cart = new Cart(req.session.cart ? req.session.cart : {});
+  cart.reduceByOne(productId);
+  req.session.cart = cart;
+  res.redirect("/shopping-cart");
 };
 
 exports.increaseCartByOne = (req, res, next) => {
-    const productId = req.params.id;
-    const cart = new Cart(req.session.cart ? req.session.cart : {});
+  const productId = req.params.id;
+  const cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    cart.increaseByOne(productId);
-    req.session.cart = cart;
-    res.redirect("/shopping-cart");
+  cart.increaseByOne(productId);
+  req.session.cart = cart;
+  res.redirect("/shopping-cart");
 };
 
 exports.removeItem = (req, res, next) => {
-    const productId = req.params.id;
-    const cart = new Cart(req.session.cart ? req.session.cart : {});
+  const productId = req.params.id;
+  const cart = new Cart(req.session.cart ? req.session.cart : {});
 
-    cart.removeItem(productId);
-    req.session.cart = cart;
-    res.redirect("/shopping-cart");
+  cart.removeItem(productId);
+  req.session.cart = cart;
+  res.redirect("/shopping-cart");
 };
 
 exports.getCheckout = (req, res, next) => {
-    if (!req.session.cart) {
-        return res.redirect("/");
-    } else if (req.session.cart.totalPrice <= 0) {
-        return res.redirect("/");
-    }
-    const cart = new Cart(req.session.cart);
-    res.render("checkout", {
-        products: cart,
-    });
+  if (!req.session.cart) {
+    return res.redirect("/");
+  } else if (req.session.cart.totalPrice <= 0) {
+    return res.redirect("/");
+  }
+  const cart = new Cart(req.session.cart);
+  res.render("checkout", {
+    products: cart,
+  });
 };
 
 exports.postCheckout = (req, res, next) => {
-    if (!req.session.cart) {
-        return res.redirect("/");
-    } else if (req.session.cart.totalPrice <= 0) {
-        return res.redirect("/");
-    }
+  if (!req.session.cart) {
+    return res.redirect("/");
+  } else if (req.session.cart.totalPrice <= 0) {
+    return res.redirect("/");
+  }
 
-    const cart = new Cart(req.session.cart);
+  const cart = new Cart(req.session.cart);
 
-    const stripe = require("stripe")(
-        process.env.STRIPE_SK_KEY
-    );
+  const stripe = require("stripe")(process.env.STRIPE_SK_KEY);
 
-    stripe.charges.create({
-            amount: cart.finalprice * 100,
-            currency: "inr",
-            source: req.body.stripeToken,
-            description: "Test Charge",
+  stripe.charges.create({
+      amount: cart.finalprice * 100,
+      currency: "inr",
+      source: req.body.stripeToken,
+      description: "Test Charge",
+    },
+    function (error, charges) {
+      if (error) {
+        console.log(error.message);
+        return res.redirect("/shopping-cart");
+      }
+      // const orders = new Order({
+      const orders = Order.create({
+        user: req.user,
+        createdAt: Date.now(),
+        cart: cart,
+        name: req.body.name,
+        paymentId: charges.id,
+        address: {
+          address: req.body.address,
+          city: req.body.city,
+          state: req.body.state,
+          pin: req.body.pin,
+          country: req.body.country,
         },
-        function (error, charges) {
-            if (error) {
-                console.log(error.message);
-                return res.redirect("/shopping-cart");
-            }
-            // const orders = new Order({
-            const orders = Order.create({
-                user: req.user,
-                createdAt: Date.now(),
-                cart: cart,
-                name: req.body.name,
-                paymentId: charges.id,
-                address: {
-                    address: req.body.address,
-                    city: req.body.city,
-                    state: req.body.state,
-                    pin: req.body.pin,
-                    country: req.body.country,
-                }
-
-            });
-            // orders.save((err, result) => {
-            req.session.cart = null;
-            console.log("SSSSSSSSSSSUUUUUUUUUCCCCCCCCCCCCCCEEEESS");
-            res.redirect("/me");
-            // })
-
-        });
+      });
+      // orders.save((err, result) => {
+      req.session.cart = null;
+      console.log("SSSSSSSSSSSUUUUUUUUUCCCCCCCCCCCCCCEEEESS");
+      res.redirect("/me");
+      // })
+    }
+  );
 };
 
 exports.getUserPage = async (req, res, next) => {
-    const order = await Order.find({
-        user: req.user,
-    }).sort({
-        createdAt: -1
-    })
+  const order = await Order.find({
+    user: req.user,
+  }).sort({
+    createdAt: -1,
+  });
 
-
-    var cart;
-    order.forEach(function (order) {
-        cart = new Cart(order.cart)
-        order.items = cart.generateArray()
-    })
-    // console.log("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" + order.items);
-    res.render("user-page", {
-        order,
-
-    });
+  var cart;
+  order.forEach(function (order) {
+    cart = new Cart(order.cart);
+    order.items = cart.generateArray();
+  });
+  // console.log("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" + order.items);
+  res.render("user-page", {
+    order,
+  });
 };
 // ********************************************************ADMIN AREA CONTROLLER*********************
 exports.delSingleProd = async (req, res, next) => {
-    await Product.findByIdAndDelete(req.params.id)
-    res.redirect("/admin-view_All_products")
-}
-
+  await Product.findByIdAndDelete(req.params.id);
+  res.redirect("/admin-view_All_products");
+};
 
 exports.adminDashboard = (req, res, next) => {
-    res.render("admin-dashboard");
+  res.render("admin-dashboard");
 };
 
 exports.addNewProduct = async (req, res, next) => {
+  const category = await Category.find();
 
-    const category = await Category.find();
-
-    res.render("add-new-product", {
-        category
-    });
-
-
+  res.render("add-new-product", {
+    category,
+  });
 };
 
 exports.ADMINgetAllProducts = async (req, res, next) => {
-    try {
-        const d = await axios({
-            method: "GET",
-            url: "http://localhost:5000/alok/api/v1/products",
-            headers: {
-                Authorization: `Bearer ${req.cookies.jwt}`,
-            },
-        });
-        const body = d.data.data;
-        res.render("admin_GetAllProduct", {
-            products: body.products,
-        });
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const d = await axios({
+      method: "GET",
+      url: "http://localhost:5000/alok/api/v1/products",
+      headers: {
+        Authorization: `Bearer ${req.cookies.jwt}`,
+      },
+    });
+    const body = d.data.data;
+    res.render("admin_GetAllProduct", {
+      products: body.products,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.ADMINgetAllUsers = async (req, res, next) => {
-    try {
-        const d = await axios({
-            method: "GET",
-            url: "http://localhost:5000/alok/api/v1/users",
-            headers: {
-                Authorization: `Bearer ${req.cookies.jwt}`,
-            },
-        });
-        // console.log("llllllllllllllllllll:::::::" + d.data.data.products);
+  try {
+    const d = await axios({
+      method: "GET",
+      url: "http://localhost:5000/alok/api/v1/users",
+      headers: {
+        Authorization: `Bearer ${req.cookies.jwt}`,
+      },
+    });
+    // console.log("llllllllllllllllllll:::::::" + d.data.data.products);
 
-        const body = d.data.data;
-        res.render("admin_GetAllUsers", {
-            users: body.users,
-        });
-    } catch (error) {
-        console.log(error);
-    }
+    const body = d.data.data;
+    res.render("admin_GetAllUsers", {
+      users: body.users,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.deleteprod = async (req, res, next) => {
-    try {
-        const ID = req.params.id;
+  try {
+    const ID = req.params.id;
 
-        const result = await axios({
-            method: "GET",
-            url: `http://localhost:5000/alok/api/v1/products/${ID}`,
-        });
-        console.log("rsssssssssssssssssssssssssssssssssse:::" + result.data);
-        res.render("admin_Update_Product", {
-            result: result.data.data.singleProduct,
-        });
-    } catch (error) {
-        console.log("Error");
-    }
+    const result = await axios({
+      method: "GET",
+      url: `http://localhost:5000/alok/api/v1/products/${ID}`,
+    });
+    console.log("rsssssssssssssssssssssssssssssssssse:::" + result.data);
+    res.render("admin_Update_Product", {
+      result: result.data.data.singleProduct,
+    });
+  } catch (error) {
+    console.log("Error");
+  }
 };
 
 exports.adminGetAllOrder = async (req, res, next) => {
-    const order = await Order.find().sort({
-        createdAt: -1
-    })
-    res.render('admin_View_Orders', {
-        order
-    })
-
-}
+  const order = await Order.find().sort({
+    createdAt: -1,
+  });
+  res.render("admin_View_Orders", {
+    order,
+  });
+};
 
 exports.admin_HistoryAll_Orders = async (req, res, next) => {
-    const order = await Order.find().sort({
-        createdAt: -1
-    })
-    res.render('allOrderHistory', {
-        order
-    })
-}
+  const order = await Order.find().sort({
+    createdAt: -1,
+  });
+  res.render("allOrderHistory", {
+    order,
+  });
+};
 // ********************************************************ADMIN AREA CONTROLLER (Ends)*********************
 exports.cancelOrder = async (req, res, next) => {
-    try {
-        await Order.findByIdAndUpdate(req.params.id, {
-            status: "cancel"
-        }, {
-            new: true,
-            runValidators: true
-        })
-        res.redirect("/me");
-
-    } catch (error) {
-        console.log("ERROR" + error);
-    }
-
-
-}
-
+  try {
+    await Order.findByIdAndUpdate(
+      req.params.id, {
+        status: "cancel",
+      }, {
+        new: true,
+        runValidators: true,
+      }
+    );
+    res.redirect("/me");
+  } catch (error) {
+    console.log("ERROR" + error);
+  }
+};
 
 exports.login = (req, res, next) => {
-    res.render("login");
+  res.render("login");
 };
 
 exports.signup = (req, res, next) => {
-    res.render("signup");
+  res.render("signup");
 };
 
 exports.updateUserData = async (req, res, next) => {
-    const updatedUser = await User.findByIdAndUpdate(
-        req.user.id, {
-            name: req.body.name,
-            email: req.body.email,
-        }, {
-            new: true,
-            runValidators: true,
-        }
-    );
-    res.status(200).render("user-page", {
-        user: updatedUser,
-    });
+  const updatedUser = await User.findByIdAndUpdate(
+    req.user.id, {
+      name: req.body.name,
+      email: req.body.email,
+    }, {
+      new: true,
+      runValidators: true,
+    }
+  );
+  res.status(200).render("user-page", {
+    user: updatedUser,
+  });
 };

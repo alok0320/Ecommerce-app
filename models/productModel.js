@@ -77,6 +77,10 @@ const productSchema = new mongoose.Schema({
   tag3: {
     type: String
   },
+  createdAt: {
+    type: Date,
+    default: Date.now()
+  }
 });
 
 // productSchema.pre("save", function () {

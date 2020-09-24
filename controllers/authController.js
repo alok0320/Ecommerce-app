@@ -49,7 +49,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
-    role: req.body.role,
+
     password: req.body.password,
     passwordConf: req.body.passwordConf,
   });

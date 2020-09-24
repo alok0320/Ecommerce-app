@@ -6,7 +6,7 @@ export const login = async (email, password) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "http://localhost:5000/alok/api/v1/users/login",
+      url: "/alok/api/v1/users/login",
       data: {
         email,
         password,
@@ -20,7 +20,7 @@ export const login = async (email, password) => {
     console.log(res);
   } catch (err) {
     document.querySelector(".hideAlert").classList.remove("alert");
-    document.getElementById("alert").innerHTML = err.response.message;
+    document.getElementById("alert").innerHTML = err.response.data.message;
     console.log(err);
   }
 };
@@ -52,7 +52,7 @@ export const signup = async (name, email, phone, password, passwordConf) => {
         "Cannot Submit Form Please Fill Required Field Correctly";
     } else {
       document.querySelector(".hideAlert").classList.remove("alert");
-      document.getElementById("alert").innerHTML = err.response.message;
+      document.getElementById("alert").innerHTML = err.response.data.message;
     }
   }
 };

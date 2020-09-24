@@ -13,6 +13,7 @@ const userRouter = require("./Routes/userRoutes");
 const viewRouter = require("./Routes/viewRoutes");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const cors = require("cors");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const MongoStore = require("connect-mongo")(session);
@@ -20,14 +21,9 @@ const stripe = require("stripe")("sk_test_mFuB4nsGscOhWu6ttMr5PmAy00sfL1KMG6");
 
 const app = express();
 
-
 //**************************  STRIPE *********************************** */
 
-
-
 //**************************  STRIPE END*********************************** */
-
-
 
 //1)    ***** GLOBAL MIDDLEWARES */
 
@@ -44,7 +40,7 @@ const app = express();
 
 //Data Sanitization Against NoSQL Query Injection
 app.use(mongoSanitize());
-
+app.use(cors());
 //Data Sanitization Against XSS
 // app.use(xss());
 
@@ -59,13 +55,17 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
 //Body Parser, reading data from body in to req.body
-app.use(express.json({
-  limit: '10kb'
-}));
-app.use(express.urlencoded({
-  extended: true,
-  limit: '10kb'
-}))
+app.use(
+  express.json({
+    limit: "10kb",
+  })
+);
+app.use(
+  express.urlencoded({
+    extended: true,
+    limit: "10kb",
+  })
+);
 
 app.use(cookieParser());
 app.use(

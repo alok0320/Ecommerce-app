@@ -4,6 +4,8 @@ const Cart = require("./../models/cart");
 const {
   createTestAccount
 } = require("nodemailer");
+const Stripe = require('stripe');
+
 const User = require("../models/userModel");
 const Category = require("../models/category");
 
@@ -201,8 +203,56 @@ exports.delSingleProd = async (req, res, next) => {
   res.redirect("/admin-view_All_products");
 };
 
-exports.adminDashboard = (req, res, next) => {
-  res.render("admin-dashboard");
+exports.adminDashboard = async (req, res, next) => {
+  const stripe = Stripe('sk_test_mFuB4nsGscOhWu6ttMr5PmAy00sfL1KMG6');
+
+  let totalSales = await stripe.balance.retrieve(function (err, available) {
+    console.log(available.available[0].amount);
+    totalSales = available.available[0].amount
+
+  });
+  const products = await Product.find();
+  const order = await Order.find({
+    user: req.user.id,
+    status: "orderPlaced",
+  })
+  const orderAdmin = await Order.find({
+
+    status: "orderPlaced",
+  })
+  const cancledOrderAdmin = await Order.find({
+    status: "cancel",
+  })
+
+  const totalOrder = await Order.find({
+    user: req.user.id,
+
+  });
+  const totalOrderAdmin = await Order.find()
+
+  let sale = 0;
+  var cart;
+
+  order.forEach(function (order) {
+    cart = new Cart(order.cart);
+    order.items = cart.generateArray();
+    sale = sale + order.cart.totalPrice
+  });
+  console.log("ssssssssssssssssssssssssssssss" + totalSales);
+
+
+  res.render("admin-dashboard", {
+    order,
+    sale,
+    totalOrder,
+    totalOrderAdmin,
+    orderAdmin,
+    cancledOrderAdmin,
+    products,
+    totalSales
+
+
+  });
 };
 
 exports.addNewProduct = async (req, res, next) => {

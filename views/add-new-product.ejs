@@ -74,8 +74,10 @@
                     <li class="active"><a href=""> <i class="icon-grid"></i>Add New Product </a></li>
                     <li><a href="/admin-view_All_products"> <i class="icon-interface-windows"></i>View All Product</a>
                     </li>
-                    <li><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
-                    <li><a href="/admin-view_All_Users"> 👥 View All User</a></li>
+                    <li><a href="/view_allOrders"> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
+                    <%if(user.role==="admin"){%>
+                    <li><a href="/admin-view_All_Users"> <i class="fas fa-user"></i>View All User</a></li>
+                    <%}%>
                     <li><a href="/me"> <i class="icon-padnote"></i>My Account </a></li>
                 </ul>
                 <!-- <ul class="list-unstyled">
@@ -124,150 +126,140 @@
                                     required>
                                     <option disabled selected value="Select Category">Select Category</option>
                                     <%category.forEach (function(category){%>
-                                    <option style="color: brown;"><%=category.category%></option>
-                                    <%})%>
+                    <option style="color: brown;"><%=category.category%></option>
+                    <%})%>
 
-                                </select>
+                    </select>
 
-                            </div>
-                            <div class="form-group">
-                                <label for="productSubCategory">Product SUBCATEGORY(optional)</label><span
-                                    style="color: red;size: 1rem;">*</span>
-                                <input type="text" class="form-control" id="productSubCategory"
-                                    aria-describedby="emailHelp" placeholder="Enter Product's SubCategory" required
-                                    autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="productQuantity">Selling Price</label><span
-                                    style="color: red;size: 1rem;">*</span>
-                                <input type="tel" class="form-control" id="productSellPrice"
-                                    aria-describedby="emailHelp" placeholder="Selling Price" required
-                                    autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="productQuantity">Max Price</label><span
-                                    style="color: red;size: 1rem;">*</span>
-                                <input type="tel" class="form-control" id="productMaxPrice" aria-describedby="emailHelp"
-                                    placeholder="Maximum Price" required autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="productQuantity">AVAILABLE QUANTITY</label><span
-                                    style="color: red;size: 1rem;">*</span>
-                                <input type="tel" class="form-control" id="productAvailableQty"
-                                    aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required
-                                    autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label for="productweight">PRODUCT WEIGHT</label>
-                                <input type="tel" class="form-control" id="productweight" aria-describedby="emailHelp"
-                                    placeholder="PRODUCT WEIGHT" autocomplete="off">
-                            </div>
-                            <!-- <div class="form-group">
+        </div>
+        <div class="form-group">
+            <label for="productSubCategory">Product SUBCATEGORY(optional)</label><span
+                style="color: red;size: 1rem;">*</span>
+            <input type="text" class="form-control" id="productSubCategory" aria-describedby="emailHelp"
+                placeholder="Enter Product's SubCategory" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">Selling Price</label><span style="color: red;size: 1rem;">*</span>
+            <input type="tel" class="form-control" id="productSellPrice" aria-describedby="emailHelp"
+                placeholder="Selling Price" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">Max Price</label><span style="color: red;size: 1rem;">*</span>
+            <input type="tel" class="form-control" id="productMaxPrice" aria-describedby="emailHelp"
+                placeholder="Maximum Price" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">AVAILABLE QUANTITY</label><span style="color: red;size: 1rem;">*</span>
+            <input type="tel" class="form-control" id="productAvailableQty" aria-describedby="emailHelp"
+                placeholder="AVAILABLE QUANTITY" required autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="productweight">PRODUCT WEIGHT</label>
+            <input type="tel" class="form-control" id="productweight" aria-describedby="emailHelp"
+                placeholder="PRODUCT WEIGHT" autocomplete="off">
+        </div>
+        <!-- <div class="form-group">
                                 <label for="productQuantity">Delivery Charge</label>
                                 <input type="tel" class="form-control" id="deliverycharge" value=""
                                     aria-describedby="emailHelp" placeholder="AVAILABLE QUANTITY" required>
                             </div> -->
-                            <div class="form-group">
-                                <label for="productDescription">PRODUCT DESCRIPTION</label>
-                                <textarea type="textarea" class="form-control" id="productDescription"
-                                    aria-describedby="emailHelp" rows="3" placeholder="PRODUCT DESCRIPTION"></textarea>
-                            </div>
+        <div class="form-group">
+            <label for="productDescription">PRODUCT DESCRIPTION</label>
+            <textarea type="textarea" class="form-control" id="productDescription" aria-describedby="emailHelp" rows="3"
+                placeholder="PRODUCT DESCRIPTION"></textarea>
+        </div>
 
-                            <div class="form-group">
-                                <label for="exampleSelect1">Added By</label><span
-                                    style="color: red;size: 1rem;">*</span>
-                                <select class="form-control" id="approvedBy" required>
-                                    <option disabled selected>Choose</option>
-                                    <option>Alok Puri</option>
-                                    <option>Shashwat Pratap Singh</option>
+        <div class="form-group">
+            <label for="exampleSelect1">Added By</label><span style="color: red;size: 1rem;">*</span>
+            <select class="form-control" id="approvedBy" required>
+                <option disabled selected>Choose</option>
+                <option>Alok Puri</option>
+                <option>Shashwat Pratap Singh</option>
 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Enable Display</label><span
-                                    style="color: red;size: 1rem;">*</span>
-                                <select class="form-control" id="enableDisplay" required>
-                                    <option disabled selected>Choose</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1">Enable Display</label><span style="color: red;size: 1rem;">*</span>
+            <select class="form-control" id="enableDisplay" required>
+                <option disabled selected>Choose</option>
+                <option>Yes</option>
+                <option>No</option>
 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Deal Of Day</label><span
-                                    style="color: red;size: 1rem;">*</span>
-                                <select class="form-control" id="dealOfDay" required>
-                                    <option disabled selected>Choose</option>
-                                    <option>Yes</option>
-                                    <option>No</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1">Deal Of Day</label><span style="color: red;size: 1rem;">*</span>
+            <select class="form-control" id="dealOfDay" required>
+                <option disabled selected>Choose</option>
+                <option>Yes</option>
+                <option>No</option>
 
-                                </select>
-                            </div>
+            </select>
+        </div>
 
-                            <br>
-                            <h4>Tags</h4><small>(Optional)</small>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Tag 1</label><br>
-                                <input type="text" id="tag1" autocomplete="off">
+        <br>
+        <h4>Tags</h4><small>(Optional)</small>
+        <div class="form-group">
+            <label for="exampleSelect1">Tag 1</label><br>
+            <input type="text" id="tag1" autocomplete="off">
 
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Tag 2</label><br>
-                                <input type="text" id="tag2" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1">Tag 2</label><br>
+            <input type="text" id="tag2" autocomplete="off">
 
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Tag 3</label><br>
-                                <input type="text" id="tag3" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1">Tag 3</label><br>
+            <input type="text" id="tag3" autocomplete="off">
 
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleSelect1">Tag 4</label><br>
-                                <input type="text" id="tag4" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="exampleSelect1">Tag 4</label><br>
+            <input type="text" id="tag4" autocomplete="off">
 
-                            </div>
+        </div>
 
 
-                            <div class="wrap-file" style="display: flex;">
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Product Image</label><span
-                                        style="color: red;size: 1rem;">*</span>
-                                    <input type="file" accept="image/*" name="photo" class="form-control-file"
-                                        id="photo" required aria-describedby="fileHelp">
-                                    <small id="fileHelp" class="form-text text-muted">This is an display Image</small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputFile">Please provide Image less than 1 Mb</label>
-                                    <!-- <input type="file" name="photo" class="form-control-file" id="photo"
+        <div class="wrap-file" style="display: flex;">
+            <div class="form-group">
+                <label for="exampleInputFile">Product Image</label><span style="color: red;size: 1rem;">*</span>
+                <input type="file" accept="image/*" name="photo" class="form-control-file" id="photo" required
+                    aria-describedby="fileHelp">
+                <small id="fileHelp" class="form-text text-muted">This is an display Image</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputFile">Please provide Image less than 1 Mb</label>
+                <!-- <input type="file" name="photo" class="form-control-file" id="photo"
                                         aria-describedby="fileHelp">
                                     <small id="fileHelp" class="form-text text-muted">For Product Detail Page.</small> -->
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="submitProduct"
-                                    style="padding: 1rem; border-radius: .8rem; background-color: #194342;color: white;border: 1px solid;font-weight: bold;">Add
-                                    Product</button>
-                                </select>
-                            </div>
-                            <p class="hidden" id="SuccessAddproduct" style="border:.1rem solid red; width: 80%;"></p>
-
-                    </form>
-                </div> <!-- Page Footer-->
-                <footer class="main-footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <p>IndiCraft &copy; 2020</p>
-                            </div>
-                            <div class="col-sm-6 text-right">
-                                <p>Design by <a href="" class="external">ALOK PURI</a></p>
-                            </div>
-
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
+        <div class="form-group">
+            <button type="submit" class="submitProduct"
+                style="padding: 1rem; border-radius: .8rem; background-color: #194342;color: white;border: 1px solid;font-weight: bold;">Add
+                Product</button>
+            </select>
+        </div>
+        <p class="hidden" id="SuccessAddproduct" style="border:.1rem solid red; width: 80%;"></p>
+
+        </form>
+    </div> <!-- Page Footer-->
+    <footer class="main-footer">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>IndiCraft &copy; 2020</p>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <p>Design by <a href="" class="external">ALOK PURI</a></p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+    </div>
+    </div>
     </div>
     <script src="js/bundle.js"></script>
     <script src="jquery.min.js"></script>

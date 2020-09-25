@@ -72,9 +72,12 @@
                 <ul class="list-unstyled">
                     <li><a href="/admin-dashboard"> <i class="icon-home"></i>Home </a></li>
                     <li><a href="/admin-add_products"> <i class="icon-grid"></i>Add New Product </a></li>
-                    <li><a href=""> <i class="icon-interface-windows"></i>View All Product</a></li>
-                    <li class="active"><a href=""> <i class="fa fa-bar-chart"></i>Order Details/Status </a></li>
-                    <li><a href="/admin-view_All_Users"> 👥 View All User</a></li>
+                    <li><a href="/view_allOrders"> <i class="icon-interface-windows"></i>View All Product</a></li>
+                    <li class="active"><a href="/view_allOrders"> <i class="fa fa-bar-chart"></i>Order Details/Status
+                        </a></li>
+                    <%if(user.role==="admin"){%>
+                    <li><a href="/admin-view_All_Users"> <i class="fas fa-user"></i>View All User</a></li>
+                    <%}%>
                     <li><a href="/me"> <i class="icon-padnote"></i>My Account </a></li>
                 </ul>
 
@@ -105,57 +108,57 @@
                     </thead>
                     <tbody>
                         <%order.forEach (function(order){%>
-                        <%if (order.status != "delivered"){%>
-                        <%if (order.status != "cancel"){%>
+                    <%if (order.status != "delivered"){%>
+                    <%if (order.status != "cancel"){%>
 
-                        <tr style="color: black;font-family: 'Crimson Text', serif;font-size: 1rem;">
-                            <!-- <th scope="row">i</th> -->
-                            <!-- <td></td> -->
-                            <td><%=order.id%></td>
+                    <tr style="color: black;font-family: 'Crimson Text', serif;font-size: 1rem;">
+                        <!-- <th scope="row">i</th> -->
+                        <!-- <td></td> -->
+                        <td><%=order.id%></td>
 
-                            <td><%=order.paymentId%></td>
-                            <td style="font-weight: bold;"><%=order.user._id%></td>
+                        <td><%=order.paymentId%></td>
+                        <td style="font-weight: bold;"><%=order.user._id%></td>
 
 
 
-                            <%if(order.status==="orderPlaced" ){%>
+                        <%if(order.status==="orderPlaced" ){%>
 
-                            <td style="font-weight: bold;color: green;">
-                                <%=(order.status).toUpperCase()%><i style="font-size: .8rem;color: red;">New</i>
-                            </td>
+                        <td style="font-weight: bold;color: green;">
+                            <%=(order.status).toUpperCase()%><i style="font-size: .8rem;color: red;">New</i>
+                        </td>
 
-                            <%}%>
+                        <%}%>
 
                             <%if(order.status=== "orderDispatched"){%>
-                            <td style="font-weight: bold;color: black;"><%=(order.status).toUpperCase()%></td>
-                            <%}%>
+                        <td style="font-weight: bold;color: black;"><%=(order.status).toUpperCase()%></td>
+                        <%}%>
 
 <td style="font-size: .95rem;"><%=order.address.city+ ", "+ order.address.state%></td>
-                            <td><a href="/delete-prod/"><button onMouseOver="this.style.color='green'"
-                                        onMouseOut="this.style.color='black'" class="" id="" type="submit"><i
-                                            class="fa fa-edit"></i></button></a>
-                            </td>
+                        <td><a href="/delete-prod/"><button onMouseOver="this.style.color='green'"
+                                    onMouseOut="this.style.color='black'" class="" id="" type="submit"><i
+                                        class="fa fa-edit"></i></button></a>
+                        </td>
 
 
-                        </tr>
-                        <%}%>
+                    </tr>
+                    <%}%>
                             <%}%>
-                        <%});%>
+                    <%});%>
                     </tbody>
-                </table>
-                <br><br><br>
-                <div style="color: black;margin-bottom: 0;height: 4rem; border-top: 1px solid;" class="row">
-                    <div style="margin-top: 3rem;" class="col-sm-6">
-                        <p>IndiCraft &copy; 2020</p>
-                    </div>
-                    <div style="margin-top: 3rem;" class="col-sm-6 text-right">
-                        <p>Design by <a href="" class="external">ALOK PURI</a></p>
-                    </div>
+                    </table>
+                    <br><br><br>
+                    <div style="color: black;margin-bottom: 0;height: 4rem; border-top: 1px solid;" class="row">
+                        <div style="margin-top: 3rem;" class="col-sm-6">
+                            <p>IndiCraft &copy; 2020</p>
+                        </div>
+                        <div style="margin-top: 3rem;" class="col-sm-6 text-right">
+                            <p>Design by <a href="" class="external">ALOK PURI</a></p>
+                        </div>
 
-                </div>
-            </div> <!-- Page Footer-->
+                    </div>
+        </div> <!-- Page Footer-->
 
-        </div>
+    </div>
 
 
     </div>

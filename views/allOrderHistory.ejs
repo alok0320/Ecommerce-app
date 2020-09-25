@@ -4,10 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>View All Products | Admin Dashboard | IndiCraft</title>
+    <title>Order History | Admin Dashboard | IndiCraft</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
+    <link rel="stylesheet" href="favicon.ico">
+
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -72,7 +74,8 @@
                 <ul class="list-unstyled">
                     <li><a href="/admin-dashboard"> <i class="icon-home"></i>Home </a></li>
                     <li><a href="/admin-add_products"> <i class="icon-grid"></i>Add New Product </a></li>
-                    <li><a href="/view_allOrders"> <i class="icon-interface-windows"></i>View All Product</a></li>
+                    <li><a href="/admin-view_All_products"> <i class="icon-interface-windows"></i>View All Product</a>
+                    </li>
                     <li class="active"><a href="/view_allOrders"> <i class="fa fa-bar-chart"></i>Order Details/Status
                         </a></li>
                     <li><a href="/admin-view_All_Users"> 👥 View All User</a></li>
@@ -87,6 +90,11 @@
                         <h2 class="no-margin-bottom">Dashboard</h2>
                     </div>
                 </header>
+                <div
+                    style="background-color: black;width: 15rem;height: 4rem;display: flex;justify-content: center;align-items: center;">
+                    <a style="text-decoration: none;color: white;" href="//view_allOrders">Back to Order Page</a></div>
+                <br><br>
+
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -96,7 +104,7 @@
                             <th scope="col">status</th>
                             <th scope="col">Address</th>
 
-                            <th scope="col">View/Edit Order</th>
+
 
 
 
@@ -146,10 +154,10 @@
                             <%}%>
 
 <td style="font-size: .95rem;"><%=order.address.city+ ", "+ order.address.state%></td>
-                            <td><a href="/delete-prod/"><button onMouseOver="this.style.color='green'"
+                            <!-- <td><a href="/delete-prod/"><button onMouseOver="this.style.color='green'"
                                         onMouseOut="this.style.color='black'" class="" id="" type="submit"><i
                                             class="fa fa-edit"></i></button></a>
-                            </td>
+                            </td> -->
 
 
                         </tr>

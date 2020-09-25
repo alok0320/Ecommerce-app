@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans" />
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="favicon.ico">
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
@@ -132,6 +133,10 @@
     }
 
     @media only screen and (max-width: 720px) {
+      .deskfooter {
+        display: none;
+      }
+
       .sponsDesk1 {
         display: none;
       }
@@ -288,6 +293,10 @@
 
     @media only screen and (min-width: 720px) {
       .centered {
+        display: none;
+      }
+
+      .mobfooter {
         display: none;
       }
 
@@ -479,7 +488,7 @@
             <a href="/"><i class="material-icons">home</i> Home</a>
           </li>
           <li>
-            <a href="/login"><i class="material-icons">shopping_cart</i> My Cart</a>
+            <a href="/shopping-cart"><i class="material-icons">shopping_cart</i> My Cart</a>
           </li>
           <li>
             <a href="/login"><i class="material-icons">local_mall</i> My Orders</a>
@@ -1296,7 +1305,15 @@
       <br><br><br><br>
 
       <footer style="background-color: rgb(59, 57, 57);"><br>
-        <div style="background-color: black; text-align: center;color: white;">
+        <div class="mobfooter" style="background-color: black; text-align: center;color: white;">
+          <p style="height: 2rem;display: flex;justify-content: center; align-items: center;"><br>&copy; Indicraft
+          </p>
+          <p style="height: 2rem;"> <a style="text-decoration: none;color: rgb(153, 159, 245);" href=""> &nbsp; Project
+              Synopsis</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a style="text-decoration: none;color:  rgb(153, 159, 245);"
+              href="mailto:purialok.24@gmail.com"> Contact Developer </a>
+          </p>
+        </div>
+        <div class="deskfooter" style="background-color: black; text-align: center;color: white;">
           <p style="height: 2rem;display: flex;justify-content: center; align-items: center;"><br>&copy; Indicraft
           </p>
           <p style="height: 2rem;"> <a style="text-decoration: none;color: rgb(153, 159, 245);" href=""> &nbsp; Project
@@ -1304,6 +1321,7 @@
               href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=purialok.24@gmail.com"> Contact Developer </a>
           </p>
         </div>
+
 
       </footer>
       <script src="jquery.min.js"></script>

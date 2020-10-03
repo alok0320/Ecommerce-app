@@ -99,7 +99,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 2) Verification of token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
+
 
   //check if User Exists
   const currentUser = await User.findById(decoded.id);
@@ -137,7 +137,7 @@ exports.isLoggedIn = (async (req, res, next) => {
         req.cookies.jwt,
         process.env.JWT_SECRET
       );
-      console.log(decoded);
+
 
       //check if User Exists
       const currentUser = await User.findById(decoded.id);
@@ -167,7 +167,7 @@ exports.isLoggedIn = (async (req, res, next) => {
 
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
-    console.log(...roles);
+
     //roles ['admin','seller']. role='user'
     if (!roles.includes(req.user.role)) {
       return next(

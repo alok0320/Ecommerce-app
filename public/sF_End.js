@@ -43,7 +43,6 @@ function stripeResponseHandler(status, response) {
         }, 5 * 1000)
 
         //  alert(response.error.message)
-        console.log(response.error);
         $form.find('button').prop('disabled', false); // Re-enable submission
         //  alert(expiryVal)
 

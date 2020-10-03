@@ -38,7 +38,7 @@ exports.getProducts = async (req, res, next) => {
       newArrivals
     });
   } catch (err) {
-    console.log(err);
+    return err
   }
 };
 
@@ -59,7 +59,6 @@ exports.addToCart = (req, res, next) => {
 
     // cart.add(product, product._id);
     req.session.cart = cart;
-    console.log(req.session.cart);
     res.redirect("/shopping-cart");
   });
 
@@ -153,7 +152,6 @@ exports.postCheckout = (req, res, next) => {
     },
     function (error, charges) {
       if (error) {
-        console.log(error.message);
         return res.redirect("/shopping-cart");
       }
       // const orders = new Order({
@@ -173,7 +171,6 @@ exports.postCheckout = (req, res, next) => {
       });
       // orders.save((err, result) => {
       req.session.cart = null;
-      console.log("SSSSSSSSSSSUUUUUUUUUCCCCCCCCCCCCCCEEEESS");
       res.redirect("/me");
       // })
     }
@@ -192,7 +189,6 @@ exports.getUserPage = async (req, res, next) => {
     cart = new Cart(order.cart);
     order.items = cart.generateArray();
   });
-  // console.log("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" + order.items);
   res.render("user-page", {
     order,
   });
@@ -207,7 +203,6 @@ exports.adminDashboard = async (req, res, next) => {
   const stripe = Stripe('sk_test_mFuB4nsGscOhWu6ttMr5PmAy00sfL1KMG6');
 
   let totalSales = await stripe.balance.retrieve(function (err, available) {
-    console.log(available.available[0].amount);
     totalSales = available.available[0].amount
 
   });
@@ -238,7 +233,6 @@ exports.adminDashboard = async (req, res, next) => {
     order.items = cart.generateArray();
     sale = sale + order.cart.totalPrice
   });
-  console.log("ssssssssssssssssssssssssssssss" + totalSales);
 
 
   res.render("admin-dashboard", {
@@ -267,7 +261,7 @@ exports.ADMINgetAllProducts = async (req, res, next) => {
   try {
     const d = await axios({
       method: "GET",
-      url: "/alok/api/v1/products",
+      url: "https://floating-dawn-44384.herokuapp.com/alok/api/v1/products",
       headers: {
         Authorization: `Bearer ${req.cookies.jwt}`,
       },
@@ -285,12 +279,11 @@ exports.ADMINgetAllUsers = async (req, res, next) => {
   try {
     const d = await axios({
       method: "GET",
-      url: "/alok/api/v1/users",
+      url: "https://floating-dawn-44384.herokuapp.com/alok/api/v1/users",
       headers: {
         Authorization: `Bearer ${req.cookies.jwt}`,
       },
     });
-    // console.log("llllllllllllllllllll:::::::" + d.data.data.products);
 
     const body = d.data.data;
     res.render("admin_GetAllUsers", {
@@ -307,9 +300,8 @@ exports.deleteprod = async (req, res, next) => {
 
     const result = await axios({
       method: "GET",
-      url: `/alok/api/v1/products/${ID}`,
+      url: `https://floating-dawn-44384.herokuapp.com/alok/api/v1/products/${ID}`,
     });
-    console.log("rsssssssssssssssssssssssssssssssssse:::" + result.data);
     res.render("admin_Update_Product", {
       result: result.data.data.singleProduct,
     });
@@ -353,10 +345,16 @@ exports.cancelOrder = async (req, res, next) => {
 };
 
 exports.login = (req, res, next) => {
+  if (req.cookies.jwt) {
+    return res.redirect('/')
+  }
   res.render("login");
 };
 
 exports.signup = (req, res, next) => {
+  if (req.cookies.jwt) {
+    return res.redirect('/')
+  }
   res.render("signup");
 };
 

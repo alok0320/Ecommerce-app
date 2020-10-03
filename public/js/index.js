@@ -72,7 +72,6 @@ if (promocode) {
         // function verify() {
         const promocode = document.querySelector(".promocode").value
         if (promocode.match("happy")) {
-            console.log("success");
 
 
             document.getElementById("hidden_discount").classList.remove("hidden")

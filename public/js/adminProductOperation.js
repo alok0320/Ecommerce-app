@@ -31,7 +31,6 @@ export const addproduct = async (form) => {
             // },
 
         });
-        console.log(res.data.status);
         if (res.data.status === "Success") {
             document.getElementById("SuccessAddproduct").classList.remove("hidden")
             document.getElementById("SuccessAddproduct").style.color = "green"

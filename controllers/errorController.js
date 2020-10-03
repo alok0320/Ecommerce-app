@@ -42,7 +42,7 @@ const sendErrorProd = (err, res) => {
     } //Programming Error That dont leake error detail 
     else {
 
-        console.error('ERRORRRRRRRRRRRRRRr', err)
+
 
         res.status(500).json({
             status: 'Fail',

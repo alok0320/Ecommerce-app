@@ -14,18 +14,14 @@ export const login = async (email, password) => {
                 password,
             },
         });
-        console.log(res.data.status);
-        console.log(res.data);
 
         if (res.data.status === "Success") {
             location.assign("/");
         }
 
-        console.log(res);
     } catch (err) {
         document.querySelector(".hideAlert").classList.remove("alert");
         document.getElementById("alert").innerHTML = err.response.data.message;
-        console.log(err);
     }
 };
 
@@ -43,12 +39,10 @@ export const signup = async (name, email, phone, password, passwordConf) => {
                 passwordConf,
             },
         });
-        console.log(res.data.status);
         if (res.data.status === "Success") {
             location.assign("/");
         }
 
-        console.log(res);
     } catch (err) {
         if (err.response.status === 500) {
             document.querySelector(".hideAlert").classList.remove("alert");
@@ -73,7 +67,6 @@ export const logout = async () => {
             location.assign("/");
         }
     } catch (error) {
-        console.log(error);
         alert("Error in Logging Out. Please Try Again!!!");
     }
 };

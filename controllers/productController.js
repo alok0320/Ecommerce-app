@@ -77,8 +77,8 @@ exports.getSingleProduct = catchAsync(async (req, res, next) => {
 });
 
 exports.addNewProduct = catchAsync(async (req, res, next) => {
-  console.log(req.body);
-  console.log("FFFFFFF" + req.file);
+
+
 
   const newProduct = await Product.create({
     name: req.body.name,

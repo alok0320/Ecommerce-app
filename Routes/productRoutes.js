@@ -4,7 +4,7 @@ const authController = require("./../controllers/authController");
 
 const router = new express.Router();
 // router.param('id', productController.checkId);
-router.get("/404")
+
 
 
 

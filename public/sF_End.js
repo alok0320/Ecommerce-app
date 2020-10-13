@@ -1,4 +1,4 @@
-Stripe.setPublishableKey("pk_test_ywtpA1GcQzVPYgvAetELuJzO00ZhfF9qu6");
+Stripe.setPublishableKey(process.env.STRIPE_PUBLIC_KEY);
 
 const $form = $('#checkoutform')
 

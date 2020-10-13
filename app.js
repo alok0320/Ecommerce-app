@@ -17,7 +17,7 @@ const cors = require("cors");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const MongoStore = require("connect-mongo")(session);
-const stripe = require("stripe")("sk_test_mFuB4nsGscOhWu6ttMr5PmAy00sfL1KMG6");
+const stripe = require("stripe")(process.env.STRIPE_SK_KEY);
 
 const app = express();
 

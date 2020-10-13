@@ -200,7 +200,7 @@ exports.delSingleProd = async (req, res, next) => {
 };
 
 exports.adminDashboard = async (req, res, next) => {
-  const stripe = Stripe('sk_test_mFuB4nsGscOhWu6ttMr5PmAy00sfL1KMG6');
+  const stripe = Stripe(process.env.STRIPE_SK_KEY);
 
   let totalSales = await stripe.balance.retrieve(function (err, available) {
     totalSales = available.available[0].amount
